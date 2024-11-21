@@ -1,0 +1,6 @@
+@AzAppConfigKeyVault_HostAddress = http://localhost:5137
+
+GET {{AzAppConfigKeyVault_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
