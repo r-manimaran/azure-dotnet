@@ -27,8 +27,10 @@ Define the below AppSettings.json
 Create a Configuration in Azure
 ![alt text](image-1.png)
 
-Custom Feature Filter:
+Custom Feature Filter: Browser filter to show only in th Edge Browser.
+
 ![alt text](image-3.png)
 
-Random Flag
+Random Flag ; 50 percentage you can see the footer section with link.
+
 ![alt text](image-2.png)
