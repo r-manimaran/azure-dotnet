@@ -1,0 +1,62 @@
+﻿@page
+@model IndexModel
+@using Microsoft.FeatureManagement
+@inject IFeatureManager featureManager
+@inject ILogger<Pages_Index> Logger
+
+@{
+    ViewData["Title"] = "Home page";
+    var isHolidayEnabled = await featureManager.IsEnabledAsync("HolidayDiscount");
+    var browserFlag = await featureManager.IsEnabledAsync("BrowserFlag");
+    var randomFlag = await featureManager.IsEnabledAsync("RandomFlag");
+
+    Logger.LogInformation("Holiday discount feature is enabled: {isEnabled}", isHolidayEnabled);
+    Logger.LogInformation("Browser Flage custom feature is enabled: {isEnabled}", browserFlag);
+    Logger.LogInformation("Random Flag feature is enabled: {isEnabled}", randomFlag);
+    //Added for Debugging Purpose
+     var configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .Build();
+    
+    var featureSection = configuration.GetSection("FeatureManagement").Get<Dictionary<string, object>>();
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+   
+    @if (isHolidayEnabled)
+    {
+     <div>
+        <p class="display-6">Holiday Season..</p>
+        <p>Enjoy store wise 40% discount on any product!</p>
+     </div>
+    } 
+   
+    <div>Current Utc Time: @DateTime.UtcNow.ToString("s")</div>
+    
+    @* Debug information (remove in production) *@
+    <div>
+        <p>Feature Status: @(isHolidayEnabled ? "Enabled" : "Disabled")</p>
+        <p>Current Time (UTC): @DateTime.UtcNow</p>
+    </div>
+
+    @if (browserFlag)
+    {
+        <div> You can only see this on Edge</div>
+    }
+
+  @*   <div style="text-align: left; margin-top: 20px; padding: 10px; background-color: #f5f5f5;">
+    <h4>Debug Information:</h4>
+    <p>Current UTC Time: @DateTime.UtcNow</p>
+    <p>Feature Configuration:</p>
+    <pre>@System.Text.Json.JsonSerializer.Serialize(featureSection, new System.Text.Json.JsonSerializerOptions { WriteIndented = true })</pre>
+  </div> *@
+  @if(randomFlag){
+      <p> This part wil show random</p>
+        <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+  }
+    
+</div>
