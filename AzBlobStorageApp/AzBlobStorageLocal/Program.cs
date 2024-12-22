@@ -2,6 +2,9 @@ using AzBlobStorageLocal.Endpoints;
 using AzBlobStorageLocal.Services;
 using Azure.Storage.Blobs;
 using Scalar.AspNetCore;
+using Serilog;
+using Serilog.Enrichers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApi();
@@ -10,6 +13,11 @@ builder.Services.AddSingleton(_ =>
         new BlobServiceClient(
             builder.Configuration.GetConnectionString("BlobStorage")
                             ));
+// Add Serilog
+builder.Services.AddHeaderPropagation(opt => opt.Headers.Add("azure-correlation-id"));
+builder.Host.UseSerilog((context, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration));
+    
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
