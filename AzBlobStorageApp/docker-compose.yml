@@ -1,0 +1,25 @@
+services:
+  azblobstoragelocal:
+    image: ${DOCKER_REGISTRY-}azblobstoragelocal
+    container_name: azblobstoragelocal
+    build:
+      context: .
+      dockerfile: AzBlobStorageLocal/Dockerfile
+
+  seq:
+    image: datalust/seq:latest
+    container_name: azureapp.seq
+    environment:
+       - ACCEPT_EULA=Y
+    ports:
+      - 5341:5341
+      - 8081:80
+
+  azblobstorage:
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+    container_name: azblobstorage
+    volumes:
+      - ./.containers/blob_storage/data:/data
+    ports:
+      - "10000:10000"
+    command: "azurite-blob --blobHost 0.0.0.0 -l /data"
