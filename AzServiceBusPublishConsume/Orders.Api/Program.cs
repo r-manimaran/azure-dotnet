@@ -1,38 +1,29 @@
-using AzBlobStorageLocal.Endpoints;
-using AzBlobStorageLocal.Extensions;
-using AzBlobStorageLocal.Services;
-using Azure.Storage.Blobs;
+using Azure.Messaging.ServiceBus;
+using Orders.Api.Endpoints;
 using Scalar.AspNetCore;
-using Serilog;
-using Serilog.Enrichers;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-// Alternate Approach to Register the Services
-//builder.Services.AddEndpoints(Assembly.GetExecutingAssembly()); 
+// Using DI to register the ServiceBus 
+//builder.Services.AddSingleton<ServiceBusClient>(new ServiceBusClient(
+//    builder.Configuration["ServiceBus:ConnectionString"]
+//));
 
-builder.Services.AddSingleton<IBlobService, BlobService>();
-builder.Services.AddSingleton(_ => 
-        new BlobServiceClient(
-            builder.Configuration.GetConnectionString("BlobStorage")
-                            ));
-// Add Serilog
-builder.Services.AddHeaderPropagation(opt => opt.Headers.Add("azure-correlation-id"));
-builder.Host.UseSerilog((context, configuration) => configuration
-    .ReadFrom.Configuration(context.Configuration));
-    
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+app.UseSwagger();
+app.UseSwaggerUI();
 app.MapScalarApiReference();
 
 app.UseHttpsRedirection();
@@ -55,11 +46,7 @@ app.MapGet("/weatherforecast", () =>
     return forecast;
 })
 .WithName("GetWeatherForecast");
-
-//Alternative way to register the Endpoints
-//app.MapEndpoints();
-
-app.MapBlobStorageEndpoint();
+app.MapMessagingEndpoints();
 app.Run();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
