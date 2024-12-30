@@ -15,3 +15,7 @@
    - **Description**: Running BlobStorage in Docker containers and perform Azure Blob operations
    - **Link**: [ClickHere](https://github.com/r-manimaran/azure-dotnet/tree/main/AzBlobStorageApp)
    ----------------------------------------
+   - **Name**: Aspire.AzureFuncApp
+   - **Description**: Running BlobStorage in .Net Aspire  and perform Azure Function operations
+   - **Link**: [ClickHere](https://github.com/r-manimaran/azure-dotnet/tree/main/Aspire.AzureFuncApp)
+   ----------------------------------------
