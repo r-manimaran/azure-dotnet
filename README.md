@@ -19,3 +19,7 @@
    - **Description**: Running BlobStorage in .Net Aspire  and perform Azure Function operations
    - **Link**: [ClickHere](https://github.com/r-manimaran/azure-dotnet/tree/main/Aspire.AzureFuncApp)
    ----------------------------------------
+   - **Name**: Aspire.CosmosDB
+   - **Description**: Running CosmosDB emulator in .Net Aspire  and perform CosmosDB CRUD operations
+   - **Link**: [ClickHere](https://github.com/r-manimaran/azure-dotnet/tree/main/Aspire.CosmosDB)
+   ----------------------------------------
