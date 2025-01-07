@@ -1,0 +1,42 @@
+@Products.Api.TargetingFeature_HostAddress = https://localhost:7110
+
+### V1 Products
+
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/1/products
+
+### V1 product
+
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/1/products/2f915c0a-43bb-4dee-8d2b-353b1442c617
+
+### V2 Product
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/2f915c0a-43bb-4dee-8d2b-353b1442c617
+x-user-id:user1
+
+### 
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/9245c9df-b989-40ef-9dc1-8ed17f7c11a5
+x-user-id:user2
+
+### 
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/9245c9df-b989-40ef-9dc1-8ed17f7c11a5
+x-user-id:user0
+
+###
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/9245c9df-b989-40ef-9dc1-8ed17f7c11a5
+x-user-id:user1
+x-user-groups: beta-testers, internal-users
+
+### Even though user groups are valid , user id is user0 which is excluded in rule, this will return not found
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/9245c9df-b989-40ef-9dc1-8ed17f7c11a5
+x-user-id:user0
+x-user-groups: beta-testers, internal-users
+
+### Valid Group alone
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/9245c9df-b989-40ef-9dc1-8ed17f7c11a5
+x-user-groups: beta-testers, internal-users
+
+### Invalid Group
+GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/2f915c0a-43bb-4dee-8d2b-353b1442c617
+x-user-groups: beta-testers, internal-users1
+
+
+

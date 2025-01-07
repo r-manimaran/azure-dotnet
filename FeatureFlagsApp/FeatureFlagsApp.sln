@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeatureManagement.TimeBased", "FeatureManagement.TimeBased\FeatureManagement.TimeBased.csproj", "{7B292209-2F23-404D-8C99-5B352B7B3D3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Products.Api.TargetingFeature", "Products.Api.TargetingFeature\Products.Api.TargetingFeature.csproj", "{80128B60-BE14-45EA-B556-C227553A9C8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{7B292209-2F23-404D-8C99-5B352B7B3D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B292209-2F23-404D-8C99-5B352B7B3D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B292209-2F23-404D-8C99-5B352B7B3D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80128B60-BE14-45EA-B556-C227553A9C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80128B60-BE14-45EA-B556-C227553A9C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80128B60-BE14-45EA-B556-C227553A9C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80128B60-BE14-45EA-B556-C227553A9C8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
