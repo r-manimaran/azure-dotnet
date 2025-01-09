@@ -10,7 +10,7 @@ GET {{Products.Api.TargetingFeature_HostAddress}}/api/1/products/2f915c0a-43bb-4
 
 ### V2 Product
 GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/2f915c0a-43bb-4dee-8d2b-353b1442c617
-x-user-id:user1
+x-user-id:user3
 
 ### 
 GET {{Products.Api.TargetingFeature_HostAddress}}/api/2/products/9245c9df-b989-40ef-9dc1-8ed17f7c11a5

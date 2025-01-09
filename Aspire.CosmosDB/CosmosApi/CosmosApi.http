@@ -1,6 +1,40 @@
-@CosmosApi_HostAddress = http://localhost:5257
+@CosmosApi_HostAddress = https://localhost:7263
 
 GET {{CosmosApi_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+GET {{CosmosApi_HostAddress}}/iots
+
+###
+
+POST {{CosmosApi_HostAddress}}/iots
+Content-Type: application/json
+
+{
+  "description": "Fridge",
+  "id": "Dev1",
+  "userId": "user1",
+  "isOnline": true
+}
+
+###
+
+@id=Dev1
+PUT {{CosmosApi_HostAddress}}/iots?id={{id}}
+Content-Type: application/json
+
+{
+  "description": "WashingMachine",
+  "id": "Dev1",
+  "userId": "user2",
+  "isOnline": false
+}
+
+###
+
+@userId=string
+DELETE {{CosmosApi_HostAddress}}/iots/{{userId}}/{{id}}
 
 ###
