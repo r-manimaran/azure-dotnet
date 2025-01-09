@@ -18,7 +18,7 @@ namespace CICDFunc
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
-            return new OkObjectResult("Welcome to Azure Functions - CI1!");
+            return new OkObjectResult("Welcome to Azure Functions - CI2!");
         }
     }
 }
