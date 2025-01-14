@@ -2,6 +2,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Data;
 using WebApi.Dtos;
+using WebApi.Extenisons;
 using WebApi.Services;
 using WebApi.Validations;
 
@@ -39,6 +40,8 @@ app.MapOpenApi();
 app.UseSwagger();
 
 app.UseSwaggerUI();
+
+app.ApplyMigration();
 
 app.UseHttpsRedirection();
 
