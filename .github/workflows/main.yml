@@ -40,3 +40,14 @@ jobs:
         scm-do-build-during-deployment: true
         respect-funcignore: true
         
+    - name: 'Log Deploy Status'
+      if: always()
+      shell: bash
+      run: |
+        echo "Deployment Status: ${{ steps.fa.outcome }}"
+        if [ -d "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output" ]; then
+        echo "Published directory exists"
+        ls -la "${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}/output"
+        else
+        echo "Published directory does not exist"
+        fi
