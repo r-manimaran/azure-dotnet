@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapi-deployment
+  annotations:
+    kubernetes.io/change-cause: "Initial deployment"
+  labels:
+    app: webapi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapi
+  template:
+    metadata:
+      labels:
+        app: webapi
+    spec:
+      containers:
+      - name: webapi
+        image: maranacr.azurecr.io/webapi:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: ASPNETCORE_URLS
+          value: "http://+:80"
+        - name: ConnectionStrings__AzureSql
+          valueFrom:
+            secretKeyRef:
+              name: azure-sql-secret
+              key: ConnectionStrings__AzureSql
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi 
+        livenessProbe:                        # Add health checks
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 60
+          periodSeconds: 15
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 10
+          failureThreshold: 3   
+      imagePullSecrets:
+      - name: acr-secret
+      
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azure-sql-secret
+type: Opaque
+data:
+  ConnectionStrings__AzureSql:
+---
+apiVersion: v1
+
+kind: Service
+metadata:
+  name: webapi-service
+
+spec:
+  selector:
+    app: webapi
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 80
+  type: LoadBalancer
+
+        

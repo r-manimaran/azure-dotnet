@@ -123,3 +123,79 @@ chmod +x build-and-push.sh
 # Run the script
 ./build-and-push.sh
 ```
+
+## Run Kubernetes locally using image from Azure Container Registry
+1. Create the deployment.yml file
+2. Create the Kubernetes secret for ACR authentication
+```bash
+# create the secrets
+kubectl create secret docker-registry acr-secret \
+  --docker-server=maranacr.azurecr.io \
+  --docker-username=maranacr \
+  --docker-password=<your-acr-password>
+```
+
+Instead of above password paste option, create a script file create_acr_secret.sh. Running the script will create the secret.
+
+- To run the create_acr_secret.sh file do,
+
+```bash
+chmod +x create_acr_secret.sh
+
+./create_acr_secret.sh
+```
+![alt text](image-4.png)
+
+- To check the created secrets, we can run the below scripts
+```bash
+# get the secrets
+kubectl get secrets
+
+# Describe the secret
+kubectl describe secret acr-secret
+
+# to delete the existing secret
+kubectl delete secret acr-secret
+```
+![alt text](image-5.png)
+
+### Create the Connection string secret
+```bash
+kubectl create secret generic azure-sql-secret \
+ --from-literal=ConnectionStrings__AzureSql="Server=tcp:maranazsql.database.windows.net,1433;Initial Catalog=Demodb;Persist Security Info=False;User ID=demoadmin;Password=passwordhere;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+ ```
+ ![alt text](image-6.png)
+
+ - Update the deployment.yml file to pass the connection string
+
+
+ ![alt text](image-7.png)
+
+![alt text](image-8.png)
+
+- Scale the replicas up and down
+
+```bash
+# Scale to 0
+kubectl scale deployment webapi-deployment --replicas=0
+
+# Scale back to desired number
+kubectl scale deployment webapi-deployment --replicas=2
+```
+Tried the below command
+```bash
+kubectl scale deployment webapi-deployment --replicas=3
+```
+![alt text](image-9.png)
+
+Tried to scale down using 
+```bash
+kubectl scale deployment webapi-deployment --replicas=2
+```
+![alt text](image-10.png)
+
+```bash
+kubectl scale deployment webapi-deployment --replicas=0
+```
+![alt text](image-11.png)
+ 
