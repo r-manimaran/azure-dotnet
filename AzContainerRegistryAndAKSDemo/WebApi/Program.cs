@@ -58,10 +58,10 @@ builder.Services.AddLogging(logging =>
 
 builder.Services.AddHealthChecks()
     .AddSqlServer(
-    connectionString: connectionString,
-    name: "sql",
-    failureStatus: HealthStatus.Degraded,
-    tags: new[] { "ready" })
+        connectionString: connectionString,
+        name: "sql",
+        failureStatus: HealthStatus.Degraded,
+        tags: new[] { "ready" })
     .AddCheck("self", () => HealthCheckResult.Healthy(),
         tags: new[] { "live" });
 
@@ -92,7 +92,7 @@ app.MapHealthChecks("/health");
 var lifetime = app.Services.GetRequiredService<IHostApplicationLifetime>();
 lifetime.ApplicationStopping.Register(() =>
 {
-    // Add delay to allow in-flight requests to complete
+    // Add delay to allow in-flight requests to complete.
     Thread.Sleep(TimeSpan.FromSeconds(10));
 });
 

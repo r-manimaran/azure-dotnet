@@ -199,3 +199,5 @@ kubectl scale deployment webapi-deployment --replicas=0
 ```
 ![alt text](image-11.png)
  
+
+ ![alt text](image-12.png)
