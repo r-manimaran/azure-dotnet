@@ -28,7 +28,7 @@ namespace UserRegistration.Api.Controllers
         [HttpGet("VerifyEmail/{token}")]
         public async Task<IActionResult> VerifyEmail(string token)
         {
-            return Ok();
+            return Ok("Verified.");
         }
     }
 }

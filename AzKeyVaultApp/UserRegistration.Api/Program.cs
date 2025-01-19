@@ -4,6 +4,7 @@ using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using UserRegistration.Api.AzureUtilities;
 using UserRegistration.Api.Data;
 using UserRegistration.Api.Extensions;
 using UserRegistration.Api.Services;
@@ -11,10 +12,23 @@ using UserRegistration.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("AzureSql");
+
+builder.Services.Configure<KeyVaultSettings>(builder.Configuration.GetSection("KeyVaultSettings"));
+builder.Services.AddMemoryCache();
+builder.Services.AddSingleton<KeyVaultUtility>();
+builder.Services.AddLogging();
+
+var serviceProvider = builder.Services.BuildServiceProvider();
+var keyVaultUtility = serviceProvider.GetRequiredService<KeyVaultUtility>();
+
+// Fetch the connectionString from appSettings
+// var sqlConnectionString = builder.Configuration.GetConnectionString("AzureSql");
+
+// Fetch the connectionString from KeyVault
+var sqlConnectionString = await keyVaultUtility.GetSecretAsync("AzureSqlDbConnectionString");
 
 builder.Services.AddDbContext<AppDbContext>(o=>
-    o.UseSqlServer(connectionString)
+    o.UseSqlServer(sqlConnectionString)
    );
 
 //builder.Services.AddDbContext<AppDbContext>(options =>
