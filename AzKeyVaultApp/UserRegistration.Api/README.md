@@ -32,3 +32,10 @@ set AZURE_IDENTITY_LOGGING_ENABLED=true
 
 ```
 
+```
+> kubectl delete deployment userregistration-api-deployment -n userregistration-api
+
+kubectl delete all --all -n userregistration-api
+
+```
+

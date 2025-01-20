@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: userregistration-api-service
+  namespace: userregistration-api
+spec:
+  selector:
+    app: userregistration-api
+    
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      
+  type: LoadBalancer

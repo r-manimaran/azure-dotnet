@@ -6,6 +6,7 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using UserRegistration.Api.AzureUtilities;
 using UserRegistration.Api.Data;
+using UserRegistration.Api;
 using UserRegistration.Api.Extensions;
 using UserRegistration.Api.Services;
 
@@ -22,10 +23,10 @@ var serviceProvider = builder.Services.BuildServiceProvider();
 var keyVaultUtility = serviceProvider.GetRequiredService<KeyVaultUtility>();
 
 // Fetch the connectionString from appSettings
-// var sqlConnectionString = builder.Configuration.GetConnectionString("AzureSql");
+var sqlConnectionString = builder.Configuration.GetConnectionString("AzureSql");
 
 // Fetch the connectionString from KeyVault
-var sqlConnectionString = await keyVaultUtility.GetSecretAsync("AzureSqlDbConnectionString");
+// var sqlConnectionString = await keyVaultUtility.GetSecretAsync("AzureSqlDbConnectionString");
 
 builder.Services.AddDbContext<AppDbContext>(o=>
     o.UseSqlServer(sqlConnectionString)
@@ -83,7 +84,7 @@ builder.Services.AddOpenTelemetry()
         ).UseOtlpExporter()
     .WithMetrics(metrics =>
         metrics.AddRuntimeInstrumentation());
-    
+
 var app = builder.Build();
 
 app.MapOpenApi();
@@ -91,6 +92,8 @@ app.MapOpenApi();
 app.UseSwagger();
 
 app.UseSwaggerUI();
+
+app.UseMiddleware<GlobalExceptionHandler>();
 
 app.ApplyMigration();
 

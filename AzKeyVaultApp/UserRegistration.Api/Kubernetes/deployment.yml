@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: userregistration-api-deployment
+  namespace: userregistration-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: userregistration-api
+  template:
+    metadata:
+      labels:
+        app: userregistration-api
+    spec:
+      containers:
+      - name: userregistration-api
+        image: maranacr.azurecr.io/userregistration:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Production"
+        - name: ConnectionStrings__AzureSql
+          valueFrom:
+            secretKeyRef:
+              name: azure-sql-secret
+              key: ConnectionStrings__AzureSql
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      imagePullSecrets:
+       - name: acr-secret

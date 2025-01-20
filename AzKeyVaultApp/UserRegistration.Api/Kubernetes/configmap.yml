@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: userregistration-api-config
+  namespace: userregistration-api
+data:
+  ConnectionStrings__AzureSql: 
