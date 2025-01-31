@@ -23,3 +23,11 @@
    - **Description**: Running CosmosDB emulator in .Net Aspire  and perform CosmosDB CRUD operations
    - **Link**: [ClickHere](https://github.com/r-manimaran/azure-dotnet/tree/main/Aspire.CosmosDB)
    ----------------------------------------
+   - **Name**: AzServiceBusPublishConsume
+   - **Description**: Using Azure Service Bus emulator to perform Publish and Consume
+   - **Link**: [ClickHere](https://github.com/r-manimaran/azure-dotnet/tree/main/AzServiceBusPublishConsume)
+   ----------------------------------------
+   - **Name**: AzContainerRegistryAndAKSDemo
+   - **Description**: Create Publish Docker image to Azure Container Registry. Run Kubernetes locally usng Docker, HeadLamp
+   - **Link**: [ClickHere](https://github.com/r-manimaran/azure-dotnet/tree/main/AzContainerRegistryAndAKSDemo)
+   ----------------------------------------
