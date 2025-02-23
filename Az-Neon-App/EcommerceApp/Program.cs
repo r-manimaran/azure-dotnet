@@ -1,15 +1,28 @@
+using Carter;
+using EcommerceApp.Host.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.AddServiceDefaults();
+
 builder.Services.AddOpenApi();
+
+builder.Services.AddWebHostInfrastructure(builder.Configuration);
+
+builder.Services.AddCarter();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+app.MapDefaultEndpoints();
+
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+
+    app.UseSwaggerUI(options => {
+        options.SwaggerEndpoint(
+        "/openapi/v1.json", "OpenAPI v1");
+    });
 }
 
 app.UseHttpsRedirection();
@@ -33,7 +46,11 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-app.Run();
+app.MapCarter();
+
+await app.ApplyMigrations();
+
+await app.RunAsync();
 
 internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {

@@ -9,7 +9,7 @@ namespace ProductsApp.Domain.Products;
 
 public class ProductCart
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public int Quantity { get; set; }
     public List<ProductCartItem> CartItems { get; set; } = [];
 

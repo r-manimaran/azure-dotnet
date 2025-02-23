@@ -9,6 +9,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsApp.Domain", "Produ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsApp.Infrastructure", "ProductsApp.Infrastructure\ProductsApp.Infrastructure.csproj", "{39ED69F6-6074-4070-AB5C-52D2BBBFE9C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Az-Neon-App.AppHost", "Az-Neon-App.AppHost\Az-Neon-App.AppHost.csproj", "{493443B9-566D-4E0F-8136-ADB9A724CF61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Az-Neon-App.ServiceDefaults", "Az-Neon-App.ServiceDefaults\Az-Neon-App.ServiceDefaults.csproj", "{B82ADBA0-6B92-46B2-8168-B00C3B53513A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "aspire", "aspire", "{CA7DAB3D-059A-423C-A9DD-BE04BB4934CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +33,20 @@ Global
 		{39ED69F6-6074-4070-AB5C-52D2BBBFE9C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39ED69F6-6074-4070-AB5C-52D2BBBFE9C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39ED69F6-6074-4070-AB5C-52D2BBBFE9C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{493443B9-566D-4E0F-8136-ADB9A724CF61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{493443B9-566D-4E0F-8136-ADB9A724CF61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{493443B9-566D-4E0F-8136-ADB9A724CF61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{493443B9-566D-4E0F-8136-ADB9A724CF61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B82ADBA0-6B92-46B2-8168-B00C3B53513A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B82ADBA0-6B92-46B2-8168-B00C3B53513A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B82ADBA0-6B92-46B2-8168-B00C3B53513A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B82ADBA0-6B92-46B2-8168-B00C3B53513A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{493443B9-566D-4E0F-8136-ADB9A724CF61} = {CA7DAB3D-059A-423C-A9DD-BE04BB4934CE}
+		{B82ADBA0-6B92-46B2-8168-B00C3B53513A} = {CA7DAB3D-059A-423C-A9DD-BE04BB4934CE}
 	EndGlobalSection
 EndGlobal
