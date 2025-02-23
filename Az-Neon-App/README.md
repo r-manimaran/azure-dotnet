@@ -40,6 +40,11 @@ azd init
 azd up
 ```
 
+### 5. Delete back the resources  deployed to azure
+```bash
+azd down
+```
+
 ## Application Architecture:
 The application consists of:
 
@@ -61,3 +66,17 @@ The application consists of:
 - Aspire Dashboard running from Azure
 
 ![alt text](Images/image-5.png)
+
+## azd commands
+
+`azd auth`: Authenticates the user with Azure.
+
+`azd init`: Initializes a new application.
+
+`azd provision`: Provisions Azure resources for an application.
+
+`azd deploy`: Deploys the application code to Azure
+
+`azd up`: Combines both `azd provision` and `azd deploy` in a single command.
+
+`azd down`: Delete Azure resources associated with an application.
