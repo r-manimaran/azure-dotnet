@@ -15,6 +15,8 @@ public static class HostExtensions
 
         services.AddScoped<IProductCartRepository, ProductCartRepository>();
 
+        services.AddScoped<IProductCartService, ProductCartService>();
+
         services.AddEfCore(configuration);
         return services;
     }
