@@ -9,18 +9,50 @@ on:
 
   workflow_dispatch:
 
+env:
+  APPLICATION_PUBLISH_PROFILE: ${{ secrets.AZURE_STATIC_APP_TOKEN}}
+  WEBAPP_NAME: "nextjs-static-app"
+  OUTPUT_LOCATION: '.next'
+
 jobs:
     build:
         runs-on: ubuntu-latest
 
         steps:
+          # Step 1: Checkout the repository code
           - uses: actions/checkout@v4
+            with:
+              submodules: true
+              lfs: false
 
+          # Step 2: Steup Node.js environment
           - name: Setup Node.js version
             uses: actions/setup-node@v4
             with:
                 node-version: "20.x"
-          - name: npm install, build and test
-            run : |
-                npm install
-
+                cache: 'npm'
+          
+          # Step 3: Install project dependencies
+          - name: Install dependencies
+            run : npm install
+          
+          # Step 4: Build Next.Js application
+          - name: Build Next.js app
+            run: npm run build
+          
+          # Step 5: Deploy to Azure Static Web apps
+          - name: Deploy to Azure Static Web apps
+            uses: Azure/static-web-apps-deploy@v1
+            with:
+              # Authentication token for Azure Static web Apps
+              azure_static_web_apps_api_token: ${{secrets.AZURE_STATIC_APP_TOKEN}}
+              # Repository Configuration
+              repo_token: ${{ secrets.GITHUB_TOKEN }}
+              # Build configuration
+              action: "upload"
+              # App location - where the source code is located
+              app_location: "/az-static-webapp-deployment"
+              api_location: ""
+              # output location
+              output_location: ${{env.OUTPUT_LOCATION}}
+          
