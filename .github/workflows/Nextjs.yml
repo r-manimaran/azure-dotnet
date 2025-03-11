@@ -31,13 +31,16 @@ jobs:
             with:
                 node-version: "20.x"
                 cache: 'npm'
+                cache-dependency-path: 'az-static-webapp-deployment/package-lock.json'
           
           # Step 3: Install project dependencies
           - name: Install dependencies
+            working-directory: ./az-static-webapp-deployment
             run : npm install
           
           # Step 4: Build Next.Js application
           - name: Build Next.js app
+            working-directory: ./az-static-webapp-deployment
             run: npm run build
           
           # Step 5: Deploy to Azure Static Web apps
