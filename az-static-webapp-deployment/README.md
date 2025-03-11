@@ -38,3 +38,10 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
 # Deploy to Azure Static Web app
+
+Steps:
+1. Create a Static Web App in Azure
+2. Download the Publish Profile
+3. Setup the Secrets in Github secrets
+4. Create the Workflow file under.github/workflows folder with the necessary job steps
+5. Commit the changes to git. Check the Actions for the automatic deployment.
