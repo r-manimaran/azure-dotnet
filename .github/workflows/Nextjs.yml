@@ -5,7 +5,7 @@ on:
     branches:
       [ main ]
     paths:
-      - 'az-static-webapp-deployment'
+      - 'az-static-webapp-deployment/**'
 
   workflow_dispatch:
 
