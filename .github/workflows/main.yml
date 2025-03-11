@@ -1,7 +1,14 @@
 name: Deploy DotNet project to Azure Function App
 
 on:
-  [push]
+  push:
+    branches:
+      [ main ]
+    paths:
+      - 'AzFuncDevOps'
+
+  workflow_dispatch:
+
   
 
 env:
