@@ -1,0 +1,26 @@
+name: Deploy NextJs app to Azure Static Web App
+
+on:
+  push:
+    branches:
+      [ main ]
+    paths:
+      - 'az-static-webapp-deployment'
+
+  workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+          - uses: actions/checkout@v4
+
+          - name: Setup Node.js version
+            uses: actions/setup-node@v4
+            with:
+                node-version: "20.x"
+          - name: npm install, build and test
+            run : |
+                npm install
+
