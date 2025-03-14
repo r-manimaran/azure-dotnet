@@ -41,7 +41,17 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 Steps:
 1. Create a Static Web App in Azure
-2. Download the Publish Profile
-3. Setup the Secrets in Github secrets
+2. Download the Deployment token from Static web App
+3. Setup the Secret in Github secrets
 4. Create the Workflow file under.github/workflows folder with the necessary job steps
 5. Commit the changes to git. Check the Actions for the automatic deployment.
+
+![alt text](image.png)
+
+![alt text](image-2.png)
+
+Before 
+![alt text](image-1.png)
+
+After automatic deployment using CI/CD
+![alt text](image-3.png)
