@@ -50,7 +50,7 @@ jobs:
             
             - name: List Published files
               run: |
-                echo: "Contents of dowload directory:"
+                echo "Contents of dowload directory:"
                 ls -la ./publish
 
               # Publish Artifacts 
