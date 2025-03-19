@@ -47,8 +47,13 @@ jobs:
                 # Step 6: Publish the Project
             - name: Publish
               run: dotnet publish ${{ env.API_PROJECT_PATH }} --configuration Release --no-restore --no-build --property:PublishDir=${{env.PUBLISH_DIR}}
-                
-                # Publish Artifacts 
+            
+            - name: List Published files
+              run: |
+                echo: "Contents of dowload directory:"
+                ls -la ./publish
+
+              # Publish Artifacts 
             - name: Publish Artifacts
               uses: actions/upload-artifact@v4
               with:
