@@ -1,0 +1,86 @@
+name: Deploy .Net Web Api using CI/CD to Azure App Service
+
+on:
+    push:
+        branches:
+          [ main ]
+        paths:
+          - 'az-webapp-github-actions/**'
+    # for manual Trigger
+    workflow_dispatch:
+env:
+  AZURE_WEBAPP_NAME: time-app
+  AZURE_WEBAPP_PACKAGE_PATH: './az-webapp-github-actions/publish'
+  DOTNET_VERSION: "9.x"
+  SOLUTION_PATH: "az-webapp-github-actions/az-webapp-github-actions.sln"
+  API_PROJECT_PATH: "az-webapp-github-actions"
+  PUBLISH_DIR: "./publish"
+  BUILD_VERSION: ${{ github.run_number }}
+
+jobs:
+    build:
+        name: Build and Test
+        runs-on: ubuntu-latest
+
+        steps:
+            # step 1: Checkout
+            - uses: actions/checkout@v4
+
+                # step 2 Setup .Net Environment
+            - name: Setup .Net
+              uses: actions/setup-dotnet@v4
+              with:
+                    dotnet-version: ${{ env.DOTNET_VERSION }}
+
+                # Step 3: Restore the project
+            - name: Restore
+              run: dotnet restore ${{ env.SOLUTION_PATH }}
+
+                # Step 4: Build the Project
+            - name: Build
+              run: dotnet build ${{ env.SOLUTION_PATH }} --configuration Release --no-restore
+              continue-on-error: false
+                # Step 5: Test the Project
+            - name: Test
+              run: dotnet test ${{ env.SOLUTION_PATH }} --configuration Release --no-restore --no-build --verbosity normal
+            
+                # Step 6: Publish the Project
+            - name: Publish
+              run: dotnet publish ${{ env.API_PROJECT_PATH }} --configuration Release --no-restore --no-build --property:PublishDir=${{env.PUBLISH_DIR}}
+                
+                # Publish Artifacts 
+            - name: Publish Artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                    name: webapp
+                    path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+    
+    deploy:
+        name: Deploy to Azure
+        runs-on: ubuntu-latest
+        environment: production
+        needs: [build]
+
+        steps:
+            - name: Download Artifact from build job
+              uses: actions/download-artifact@v4
+              with:
+                name: webapp
+                path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+
+            - name: Deploy to Azure Web App
+              uses: azure/webapps-deploy@v2
+              with:
+                app-name: ${{ env.AZURE_WEBAPP_NAME }}
+                publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+                package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+
+
+
+
+
+
+    
+
+
+      
