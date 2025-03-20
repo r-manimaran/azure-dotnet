@@ -49,7 +49,7 @@ jobs:
               working-directory: ./az-webapp-github-actions
               run: |
                 mkdir -p ./publish
-                dotnet publish TimeApi/TimeApi.csproj--configuration Release --no-restore --no-build -p:PublishDir=../publish
+                dotnet publish TimeApi/TimeApi.csproj --configuration Release --no-restore --no-build -p:PublishDir=../publish
             
             - name: List Published files
               working-directory: ./az-webapp-github-actions
