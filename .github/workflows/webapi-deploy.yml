@@ -47,7 +47,7 @@ jobs:
                 # Step 6: Publish the Project
             - name: Publish
               working-directory: ./az-webapp-github-actions
-              run: dotnet publish ${{ env.API_PROJECT_PATH }} --configuration Release --no-restore --no-build -p:PublishDir=${{env.PUBLISH_DIR}}
+              run: dotnet publish --configuration Release --no-restore --no-build -p:PublishDir=${{env.PUBLISH_DIR}}
             
             - name: List Published files
               working-directory: ./az-webapp-github-actions
