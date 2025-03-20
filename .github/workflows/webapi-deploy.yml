@@ -61,11 +61,11 @@ jobs:
                 ls -la ./publish
 
               # Publish Artifacts 
-            - name: Publish Artifacts
+            - name: Publish Artifacts              
               uses: actions/upload-artifact@v4
               with:
                     name: webapp
-                    path: ${{ env.PUBLISH_DIR }}/**
+                    path: az-webapp-github-actions/publish/**
                     if-no-files-found: error
     
     deploy:
