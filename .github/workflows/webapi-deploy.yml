@@ -47,11 +47,16 @@ jobs:
                 # Step 6: Publish the Project
             - name: Publish
               working-directory: ./az-webapp-github-actions
-              run: dotnet publish --configuration Release --no-restore --no-build -p:PublishDir=${{env.PUBLISH_DIR}}
+              run: |
+                mkdir -p ./publish
+                dotnet publish --configuration Release --no-restore --no-build -p:PublishDir=./publish
             
             - name: List Published files
               working-directory: ./az-webapp-github-actions
               run: |
+                echo "Current directory:$(pwd)"
+                echo "Directory Structure:"
+                ls -R
                 echo "Contents of dowload directory:"
                 ls -la ./publish
 
