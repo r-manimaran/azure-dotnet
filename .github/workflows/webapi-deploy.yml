@@ -58,7 +58,7 @@ jobs:
                 echo "Directory Structure:"
                 ls -R
                 echo "Contents of dowload directory:"
-                ls -la ../publish
+                ls -la ./publish
 
               # Publish Artifacts 
             - name: Publish Artifacts
