@@ -49,7 +49,7 @@ jobs:
               working-directory: ./az-webapp-github-actions
               run: |
                 mkdir -p ./publish
-                dotnet publish --configuration Release --no-restore --no-build -p:PublishDir=./publish
+                dotnet publish TimeApi/TimeApi.csproj--configuration Release --no-restore --no-build -p:PublishDir=../publish
             
             - name: List Published files
               working-directory: ./az-webapp-github-actions
@@ -58,14 +58,14 @@ jobs:
                 echo "Directory Structure:"
                 ls -R
                 echo "Contents of dowload directory:"
-                ls -la ./publish
+                ls -la ../publish
 
               # Publish Artifacts 
             - name: Publish Artifacts
               uses: actions/upload-artifact@v4
               with:
                     name: webapp
-                    path: ${{ env.PUBLISH_DIR }}/**
+                    path: ${{ env.PUBLISH_DIR }}/publish/**
                     if-no-files-found: error
     
     deploy:
@@ -79,14 +79,20 @@ jobs:
               uses: actions/download-artifact@v4
               with:
                 name: webapp
-                path: ./publish
+                path: publish
+            
+            - name: Verify Downloaded Files
+              run: |
+                echo "Current directory:$(pwd)"
+                echo "Published files:"
+                ls -la publish
 
             - name: Deploy to Azure Web App
               uses: azure/webapps-deploy@v2
               with:
                 app-name: ${{ env.AZURE_WEBAPP_NAME }}
                 publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-                package: "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+                package: publish
 
 
 
