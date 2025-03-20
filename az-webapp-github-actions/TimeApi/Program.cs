@@ -16,8 +16,24 @@ app.MapGet("/time", () =>
     return new
     {
         CurrentTime = DateTime.UtcNow,
-        TimeZone = "UTC"
+        TimeZone = "UTC",
+        UnixTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+        IsDaylightSavingTime = TimeZoneInfo.Local.IsDaylightSavingTime(DateTime.UtcNow),
+        Formats = new {
+            RFC1123 = DateTime.UtcNow.ToString("r"),
+            ISO8601 = DateTime.UtcNow.ToString("o"),
+            UnixTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()
+    
+        }
     };
+});
+
+app.MapGet("/health",()=> {
+    return Results.Ok(new {
+        Status="Healthy",
+        Version ="1.0.0",
+        Timestamp = DateTime.UtcNow.ToString("o")
+    });
 });
 
 app.Run();
