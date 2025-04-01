@@ -1,0 +1,6 @@
+@AzStorageProfileApi_HostAddress = http://localhost:5053
+
+GET {{AzStorageProfileApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
