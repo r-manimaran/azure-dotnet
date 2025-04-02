@@ -1,0 +1,6 @@
+@AzServiceBusProdConsumer_HostAddress = http://localhost:5192
+
+GET {{AzServiceBusProdConsumer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
