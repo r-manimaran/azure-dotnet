@@ -1,0 +1,105 @@
+2025-04-03 21:52:36.480 -04:00 [INF] Now listening on: https://localhost:7056
+2025-04-03 21:52:36.507 -04:00 [INF] Now listening on: http://localhost:5298
+2025-04-03 21:52:36.517 -04:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-04-03 21:52:36.623 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-03 21:52:36.625 -04:00 [INF] Hosting environment: Development
+2025-04-03 21:52:36.627 -04:00 [INF] Content root path: C:\Maran\Study\Git\Dotnet\azure-dotnet\AzServicesApp\AzBlobFileUploader
+2025-04-03 21:52:37.638 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/ - null null
+2025-04-03 21:52:37.796 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/ - 404 0 null 160.8584ms
+2025-04-03 21:52:37.813 -04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7056/, Response status code: 404
+2025-04-03 21:52:45.010 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/swagger - null null
+2025-04-03 21:52:45.032 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/swagger - 301 0 null 22.0354ms
+2025-04-03 21:52:45.039 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/swagger/index.html - null null
+2025-04-03 21:52:45.170 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/swagger/index.html - 200 null text/html;charset=utf-8 131.7163ms
+2025-04-03 21:52:45.203 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/swagger/swagger-ui.css - null null
+2025-04-03 21:52:45.221 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/swagger/index.css - null null
+2025-04-03 21:52:45.231 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-03 21:52:45.221 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/swagger/swagger-ui-bundle.js - null null
+2025-04-03 21:52:45.222 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/swagger/swagger-ui-standalone-preset.js - null null
+2025-04-03 21:52:45.356 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/_framework/aspnetcore-browser-refresh.js - 200 16521 application/javascript; charset=utf-8 124.2278ms
+2025-04-03 21:52:45.345 -04:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-04-03 21:52:45.262 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/swagger/index.js - null null
+2025-04-03 21:52:45.324 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/_vs/browserLink - null null
+2025-04-03 21:52:45.393 -04:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-04-03 21:52:45.394 -04:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-04-03 21:52:45.400 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/swagger/index.css - 200 202 text/css 179.6652ms
+2025-04-03 21:52:45.402 -04:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-04-03 21:52:45.409 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/swagger/index.js - 200 null application/javascript;charset=utf-8 176.6324ms
+2025-04-03 21:52:45.418 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 196.6064ms
+2025-04-03 21:52:45.417 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/swagger/swagger-ui.css - 200 154948 text/css 213.7212ms
+2025-04-03 21:52:45.428 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/swagger/swagger-ui-bundle.js - 200 1466741 text/javascript 207.2524ms
+2025-04-03 21:52:45.517 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/_vs/browserLink - 200 null text/javascript; charset=UTF-8 192.7234ms
+2025-04-03 21:52:45.595 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/openapi/v1.json - null null
+2025-04-03 21:52:45.617 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/swagger/favicon-32x32.png - null null
+2025-04-03 21:52:45.663 -04:00 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-04-03 21:52:45.664 -04:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-04-03 21:52:45.695 -04:00 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-04-03 21:52:45.696 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/swagger/favicon-32x32.png - 200 628 image/png 78.7333ms
+2025-04-03 21:52:45.721 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/openapi/v1.json - 404 null text/plain;charset=utf-8 128.4344ms
+2025-04-03 21:54:32.343 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/ - null null
+2025-04-03 21:54:32.372 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/ - 404 0 null 29.5718ms
+2025-04-03 21:54:32.385 -04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7056/, Response status code: 404
+2025-04-03 21:57:10.675 -04:00 [INF] Now listening on: https://localhost:7056
+2025-04-03 21:57:10.704 -04:00 [INF] Now listening on: http://localhost:5298
+2025-04-03 21:57:10.712 -04:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-04-03 21:57:10.840 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-03 21:57:10.842 -04:00 [INF] Hosting environment: Development
+2025-04-03 21:57:10.844 -04:00 [INF] Content root path: C:\Maran\Study\Git\Dotnet\azure-dotnet\AzServicesApp\AzBlobFileUploader
+2025-04-03 21:57:11.504 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/ - null null
+2025-04-03 21:57:11.638 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/ - 404 0 null 138.2146ms
+2025-04-03 21:57:11.648 -04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7056/, Response status code: 404
+2025-04-03 21:57:17.685 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-03 21:57:17.712 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/_framework/aspnetcore-browser-refresh.js - 200 16521 application/javascript; charset=utf-8 26.9578ms
+2025-04-03 21:57:17.749 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/_vs/browserLink - null null
+2025-04-03 21:57:17.820 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/_vs/browserLink - 200 null text/javascript; charset=UTF-8 71.8363ms
+2025-04-03 21:57:17.976 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/openapi/v1.json - null null
+2025-04-03 21:57:18.001 -04:00 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-04-03 21:57:18.014 -04:00 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-04-03 21:57:18.020 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/openapi/v1.json - 404 null text/plain;charset=utf-8 44.5136ms
+2025-04-03 22:04:07.295 -04:00 [INF] Now listening on: https://localhost:7056
+2025-04-03 22:04:07.340 -04:00 [INF] Now listening on: http://localhost:5298
+2025-04-03 22:04:07.357 -04:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-04-03 22:04:07.474 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-03 22:04:07.476 -04:00 [INF] Hosting environment: Development
+2025-04-03 22:04:07.478 -04:00 [INF] Content root path: C:\Maran\Study\Git\Dotnet\azure-dotnet\AzServicesApp\AzBlobFileUploader
+2025-04-03 22:04:08.449 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/ - null null
+2025-04-03 22:04:08.601 -04:00 [INF] Executing endpoint 'HTTP: GET /'
+2025-04-03 22:04:08.606 -04:00 [INF] Executed endpoint 'HTTP: GET /'
+2025-04-03 22:04:08.609 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/ - 200 null text/plain; charset=utf-8 165.3954ms
+2025-04-03 22:04:08.976 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/favicon.ico - null null
+2025-04-03 22:04:08.984 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/favicon.ico - 404 0 null 8.2768ms
+2025-04-03 22:04:08.993 -04:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7056/favicon.ico, Response status code: 404
+2025-04-03 22:04:21.423 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-03 22:04:21.450 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/_framework/aspnetcore-browser-refresh.js - 200 16521 application/javascript; charset=utf-8 26.2698ms
+2025-04-03 22:04:21.456 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/_vs/browserLink - null null
+2025-04-03 22:04:21.533 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/_vs/browserLink - 200 null text/javascript; charset=UTF-8 76.5776ms
+2025-04-03 22:04:21.597 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/openapi/v1.json - null null
+2025-04-03 22:04:21.606 -04:00 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-04-03 22:04:21.616 -04:00 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-04-03 22:04:21.620 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/openapi/v1.json - 404 null text/plain;charset=utf-8 23.2538ms
+2025-04-03 22:07:46.280 -04:00 [INF] Now listening on: https://localhost:7056
+2025-04-03 22:07:46.309 -04:00 [INF] Now listening on: http://localhost:5298
+2025-04-03 22:07:46.321 -04:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-04-03 22:07:46.441 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-04-03 22:07:46.443 -04:00 [INF] Hosting environment: Development
+2025-04-03 22:07:46.444 -04:00 [INF] Content root path: C:\Maran\Study\Git\Dotnet\azure-dotnet\AzServicesApp\AzBlobFileUploader
+2025-04-03 22:07:47.770 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/ - null null
+2025-04-03 22:07:47.909 -04:00 [INF] Executing endpoint 'HTTP: GET /'
+2025-04-03 22:07:47.914 -04:00 [INF] Executed endpoint 'HTTP: GET /'
+2025-04-03 22:07:47.919 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/ - 200 null text/plain; charset=utf-8 152.3098ms
+2025-04-03 22:07:53.151 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/_framework/aspnetcore-browser-refresh.js - null null
+2025-04-03 22:07:53.151 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/_vs/browserLink - null null
+2025-04-03 22:07:53.183 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/_framework/aspnetcore-browser-refresh.js - 200 16521 application/javascript; charset=utf-8 31.9714ms
+2025-04-03 22:07:53.231 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/_vs/browserLink - 200 null text/javascript; charset=UTF-8 79.8415ms
+2025-04-03 22:07:53.274 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7056/openapi/v1.json - null null
+2025-04-03 22:07:53.293 -04:00 [INF] Executing endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-04-03 22:07:53.596 -04:00 [INF] Executed endpoint 'HTTP: GET /openapi/{documentName}.json'
+2025-04-03 22:07:53.603 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7056/openapi/v1.json - 200 null application/json;charset=utf-8 329.2386ms
+2025-04-03 22:09:02.846 -04:00 [INF] Request starting HTTP/2 POST https://localhost:7056/api/blob/files - multipart/form-data; boundary=----WebKitFormBoundaryrkPuRLP9AleLmwlZ 59400
+2025-04-03 22:09:02.875 -04:00 [INF] Executing endpoint 'HTTP: POST /api/blob/files'
+2025-04-03 22:09:03.185 -04:00 [INF] Upload to Azure with "61604a0b-2cac-43e3-9366-6e34c16cc8a4"
+2025-04-03 22:09:03.556 -04:00 [INF] File Uploaded successfully.
+2025-04-03 22:09:03.571 -04:00 [INF] Setting HTTP status code 200.
+2025-04-03 22:09:03.577 -04:00 [INF] Writing value of type 'Guid' as Json.
+2025-04-03 22:09:03.595 -04:00 [INF] Executed endpoint 'HTTP: POST /api/blob/files'
+2025-04-03 22:09:03.604 -04:00 [INF] Request finished HTTP/2 POST https://localhost:7056/api/blob/files - 200 null application/json; charset=utf-8 758.7038ms

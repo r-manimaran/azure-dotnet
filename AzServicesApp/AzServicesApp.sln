@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileIngestionProcessor", "FileIngestionProcessor\FileIngestionProcessor.csproj", "{EFBCD2E3-51AD-4C79-B20E-F64C1C96B5A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzBlobFileUploader", "AzBlobFileUploader\AzBlobFileUploader.csproj", "{0CEB8007-B809-45FD-9194-E1836A3F74CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileProcessor", "FileProcessor\FileProcessor.csproj", "{07A27480-B8C3-4E2B-8E97-4172D34D3DDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDelivery", "FileDelivery\FileDelivery.csproj", "{1766B736-6572-4961-84FA-C34E4733F7CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzFileProcessing.Common", "AzFileProcessing.Common\AzFileProcessing.Common.csproj", "{7A1664F8-0F00-4D19-9AC7-B57AD5526F49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessagingServiceProvider", "MessagingServiceProvider\MessagingServiceProvider.csproj", "{FDDFFEA2-7B37-476D-BB4E-2AD0BA19F2BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFBCD2E3-51AD-4C79-B20E-F64C1C96B5A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFBCD2E3-51AD-4C79-B20E-F64C1C96B5A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFBCD2E3-51AD-4C79-B20E-F64C1C96B5A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFBCD2E3-51AD-4C79-B20E-F64C1C96B5A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CEB8007-B809-45FD-9194-E1836A3F74CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CEB8007-B809-45FD-9194-E1836A3F74CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CEB8007-B809-45FD-9194-E1836A3F74CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CEB8007-B809-45FD-9194-E1836A3F74CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07A27480-B8C3-4E2B-8E97-4172D34D3DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07A27480-B8C3-4E2B-8E97-4172D34D3DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07A27480-B8C3-4E2B-8E97-4172D34D3DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07A27480-B8C3-4E2B-8E97-4172D34D3DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1766B736-6572-4961-84FA-C34E4733F7CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1766B736-6572-4961-84FA-C34E4733F7CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1766B736-6572-4961-84FA-C34E4733F7CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1766B736-6572-4961-84FA-C34E4733F7CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1664F8-0F00-4D19-9AC7-B57AD5526F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1664F8-0F00-4D19-9AC7-B57AD5526F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1664F8-0F00-4D19-9AC7-B57AD5526F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1664F8-0F00-4D19-9AC7-B57AD5526F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDDFFEA2-7B37-476D-BB4E-2AD0BA19F2BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDDFFEA2-7B37-476D-BB4E-2AD0BA19F2BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDDFFEA2-7B37-476D-BB4E-2AD0BA19F2BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDDFFEA2-7B37-476D-BB4E-2AD0BA19F2BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04B90490-A783-4564-8D70-2B5548B82438}
+	EndGlobalSection
+EndGlobal
