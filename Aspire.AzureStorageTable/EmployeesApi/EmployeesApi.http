@@ -1,0 +1,28 @@
+@EmployeesApi_HostAddress = http://localhost:5290
+
+GET {{EmployeesApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+### Generates 10 employees
+GET {{EmployeesApi_HostAddress}}/api/generate/20
+Accept: application/json
+
+### Get All Employees
+GET {{EmployeesApi_HostAddress}}/api/GetEmployeesAsync
+Accept: application/json
+
+
+### Get all country with Employee Count
+GET {{EmployeesApi_HostAddress}}/api/GetEmployeesByCountryAsync
+Accept: application/json
+
+
+### Get all employees with last name starting with B
+GET {{EmployeesApi_HostAddress}}/api/employees/B
+Accept: application/json
+
+### Get all employees group by the first leeter of the firstname
+GET {{EmployeesApi_HostAddress}}/api/GetEmployeesGroupByFirstNameAsync
+Accept: application/json
+
+
