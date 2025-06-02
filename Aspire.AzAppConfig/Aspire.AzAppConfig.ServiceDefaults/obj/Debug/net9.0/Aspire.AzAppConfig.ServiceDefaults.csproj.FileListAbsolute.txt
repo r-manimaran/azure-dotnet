@@ -1,0 +1,13 @@
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\bin\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.deps.json
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\bin\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.dll
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\bin\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.pdb
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.csproj.AssemblyReference.cache
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.GeneratedMSBuildEditorConfig.editorconfig
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.AssemblyInfoInputs.cache
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.AssemblyInfo.cs
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.csproj.CoreCompileInputs.cache
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.sourcelink.json
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.dll
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\refint\Aspire.AzAppConfig.ServiceDefaults.dll
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\Aspire.AzAppConfig.ServiceDefaults.pdb
+C:\Maran\Study\Git\Dotnet\azure-dotnet\Aspire.AzAppConfig\Aspire.AzAppConfig.ServiceDefaults\obj\Debug\net9.0\ref\Aspire.AzAppConfig.ServiceDefaults.dll
