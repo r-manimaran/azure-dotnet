@@ -185,4 +185,8 @@ public class AzureBlobStorageUtility
         throw new InvalidOperationException("Operation failed after maximum retries.");
     }
     #endregion
+
+    #region Event Grid Integration
+    
+    #endregion
 }

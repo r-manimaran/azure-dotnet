@@ -56,6 +56,10 @@ public class EmailNotificationTimer
                 _logger.LogInformation($"Container '{containerName}' already exists.");
             }
 
+            string queueName = Environment.GetEnvironmentVariable("QueueName") ?? "mylogqueue";
+            // Ensure the queue exists, if not create it
+            //var queueExists = await _blobUtility.QueueExistsAsync(queueName);
+
             // Add a random log entry to the log file
             using (StreamWriter writer = new StreamWriter(filePath, true))
             {
@@ -68,6 +72,7 @@ public class EmailNotificationTimer
                 };
                 await writer.WriteLineAsync(JsonSerializer.Serialize(employee));
             }
+
             // Upload the log file to Azure Blob Storage
             byte[] fileBytes = await File.ReadAllBytesAsync(filePath);
             var blob = await _blobUtility.UploadBlobAsync(containerName, blobFileName, fileBytes);
