@@ -197,6 +197,17 @@ When blobs are created in the storage account:
 - **Least Privilege**: Functions only have necessary permissions
 - **Connection String Protection**: Database credentials stored securely
 
+## Execution 
+![alt text](image.png)
+
+![Neon Database](image-2.png)
+
+![Azure Blob Storage Container](image-3.png)
+
+![Event Grid Subscription](image-4.png)
+
+![Storage Queue](image-5.png)
+
 ## Contributing
 
 1. Fork the repository
