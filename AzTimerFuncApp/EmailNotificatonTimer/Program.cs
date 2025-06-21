@@ -1,5 +1,6 @@
 using AzureStorageUtility;
 using EmailNotificatonTimer;
+using EmailNotificatonTimer.Services;
 using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +37,9 @@ builder.Services.AddTransient<AzureBlobStorageUtility>(sp =>
         clientId, 
         logger);
 });
+
+builder.Services.AddSingleton<EmployeeService>();
+
 // Application Insights isn't enabled by default. See https://aka.ms/AAt8mw4.
 // builder.Services
 //     .AddApplicationInsightsTelemetryWorkerService()
