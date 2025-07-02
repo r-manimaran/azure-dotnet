@@ -50,7 +50,8 @@ public class AzureBlobStorageUtility
         var secretClient = new SecretClient(new Uri(keyVaultUri), new DefaultAzureCredential());
         var secret = await secretClient.GetSecretAsync(secretName);
         var sasToken = secret.Value.Value;
-        return new BlobServiceClient(new Uri($"{storageAccountUrlOrConnectionString}?{sasToken}"));
+        return new BlobServiceClient(new Uri($"https://samaranaspire.blob.core.windows.net/mylogfiles?{sasToken}"));
+       // return new BlobServiceClient($"{storageAccountUrlOrConnectionString}?{sasToken}");
     }
 
     #region Container operations

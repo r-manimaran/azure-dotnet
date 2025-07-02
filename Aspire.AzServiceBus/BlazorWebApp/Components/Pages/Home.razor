@@ -1,0 +1,22 @@
+﻿@page "/"
+@using Azure.Messaging.ServiceBus
+@inject ServiceBusClient busClient;
+
+<PageTitle>Home</PageTitle>
+
+<InputText @bind-Value=messageBody/>
+
+<button @onclick="SendToBus"> Send to Azure Service Bus Emulator</button>
+
+@code {
+    private string messageBody = "";
+
+    private async Task SendToBus()
+    {
+        ServiceBusSender _sender = busClient.CreateSender("insurancepolicies");
+
+        ServiceBusMessage message = new(messageBody);
+
+        await _sender.SendMessageAsync(message);
+    }
+}
