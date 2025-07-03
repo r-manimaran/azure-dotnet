@@ -7,7 +7,7 @@ var serviceBus = builder.AddAzureServiceBus("sbemulator").RunAsEmulator();
 var serviceBusQueue = serviceBus.AddServiceBusQueue("insurancepolicies");
 
 // For ServiceBusTopic
-// var serviceBusTopic = serviceBus.AddServiceBusTopic("insurance");
+//var serviceBusTopic = serviceBus.AddServiceBusTopic("insurance");
 
 
 var client = builder.AddProject<Projects.AzServiceBusClient>("azservicebusclient")
