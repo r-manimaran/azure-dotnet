@@ -31,3 +31,7 @@
    - **Description**: Create Publish Docker image to Azure Container Registry. Run Kubernetes locally usng Docker, HeadLamp
    - **Link**: [ClickHere](https://github.com/r-manimaran/azure-dotnet/tree/main/AzContainerRegistryAndAKSDemo)
    ----------------------------------------
+Aspire.AzServiceBus
+   - **Name**: Aspire.AzServiceBus
+   - **Description**: Use Azure Service bus using the emulator in .net Aspire Host
+   - **Link**: [ClickHere]
