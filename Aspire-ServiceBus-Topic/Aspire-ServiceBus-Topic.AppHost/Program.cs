@@ -1,10 +1,13 @@
 using Aspire.Hosting.Azure;
+using Aspire_ServiceBus_Topic.AppHost;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var serviceBus = builder.AddAzureServiceBus("sbemulator").RunAsEmulator();
+var serviceBus = builder.AddAzureServiceBus("sbemulator").RunAsEmulator(c=>c.WithLifetime(ContainerLifetime.Persistent));
+
 // add topic and subscription
-var topic = serviceBus.AddServiceBusTopic("insurance");
+var topic = serviceBus.AddServiceBusTopic("insurance").WithTestCommands();
+
 topic.AddServiceBusSubscription("sub1")
     .WithProperties(subscription =>
     {
@@ -18,6 +21,7 @@ topic.AddServiceBusSubscription("sub1")
             }
         });*/
     });
+
 builder.AddProject<Projects.WebApi>("webapi").WithReference(topic).WaitFor(topic);
 
 builder.AddProject<Projects.ConsoleConsumer>("consoleconsumer").WithReference(topic).WaitFor(topic);
