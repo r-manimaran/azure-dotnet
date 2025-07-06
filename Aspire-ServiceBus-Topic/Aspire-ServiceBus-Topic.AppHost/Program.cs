@@ -22,4 +22,7 @@ builder.AddProject<Projects.WebApi>("webapi").WithReference(topic).WaitFor(topic
 
 builder.AddProject<Projects.ConsoleConsumer>("consoleconsumer").WithReference(topic).WaitFor(topic);
 
+builder.AddAzureFunctionsProject<Projects.FunctionAppTopicConsumer>("functionapptopicconsumer")
+    .WithReference(topic).WaitFor(topic);
+
 builder.Build().Run();
