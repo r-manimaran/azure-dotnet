@@ -1,0 +1,186 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "containerApps_sample_app_name1": {
+            "defaultValue": "writer-app",
+            "type": "String"
+        },
+        "containerApps_sample_app_name2": {
+            "defaultValue": "reader-app",
+            "type": "String"
+        },
+        "managedEnvironments_cne_rev_name": {
+            "defaultValue": "cne-rev",
+            "type": "String"
+        },
+        "storage_account_name": {
+            "defaultValue": "samaranaspire",
+            "type": "String"
+        },
+        "storage_account_key": {
+            "type": "secureString"
+        },
+        "file_share_name": {
+            "defaultValue": "storagemount",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.OperationalInsights/workspaces",
+            "apiVersion": "2021-06-01",
+            "name": "myloganalytics",
+            "location": "East US",
+            "properties": {
+                "sku": {
+                    "name": "PerGB2018"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.App/managedEnvironments",
+            "apiVersion": "2023-05-01",
+            "name": "[parameters('managedEnvironments_cne_rev_name')]",
+            "location": "East US",
+            "properties": {
+                "appLogsConfiguration": {
+                    "destination": "log-analytics",
+                    "logAnalyticsConfiguration": {
+                        "customerId": "[reference('myloganalytics').customerId]",
+                        "sharedKey": "[listKeys('myloganalytics', '2021-06-01').primarySharedKey]"
+                    }
+                }
+            }
+        },
+        {
+            "type": "Microsoft.App/managedEnvironments/storages",
+            "apiVersion": "2023-05-01",
+            "name": "[concat(parameters('managedEnvironments_cne_rev_name'), '/myazurefiles')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.App/managedEnvironments', parameters('managedEnvironments_cne_rev_name'))]"
+            ],
+            "properties": {
+                "azureFile": {
+                    "accountName": "[parameters('storage_account_name')]",
+                    "accountKey": "[parameters('storage_account_key')]",
+                    "shareName": "[parameters('file_share_name')]",
+                    "accessMode": "ReadWrite"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.App/containerApps",
+            "apiVersion": "2023-05-01",
+            "name": "[parameters('containerApps_sample_app_name1')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.App/managedEnvironments/storages', parameters('managedEnvironments_cne_rev_name'), 'myazurefiles')]"
+            ],
+            "properties": {
+                "managedEnvironmentId": "[resourceId('Microsoft.App/managedEnvironments', parameters('managedEnvironments_cne_rev_name'))]",
+                "configuration": {
+                    "activeRevisionsMode": "Multiple",
+                    "ingress": {
+                        "external": true,
+                        "targetPort": 8080,
+                        "transport": "auto",
+                        "traffic": [
+                            {
+                                "weight": 100,
+                                "latestRevision": true
+                            }
+                        ],
+                        "allowInsecure": false
+                    }
+                },
+                "template": {
+                    "containers": [
+                        {
+                            "image": "rmanimaran/writerapp:latest",
+                            "name": "writer",
+                            "resources": {
+                                "cpu": 0.5,
+                                "memory": "1Gi"
+                            },
+                            "volumeMounts": [
+                                {
+                                    "mountPath": "/app/images",
+                                    "volumeName": "azure-files-volume"
+                                }
+                            ]
+                        }
+                    ],
+                    "scale": {
+                        "minReplicas": 0,
+                        "maxReplicas": 5
+                    },
+                    "volumes": [
+                        {
+                            "name": "azure-files-volume",
+                            "storageType": "AzureFile",
+                            "storageName": "myazurefiles"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.App/containerApps",
+            "apiVersion": "2023-05-01",
+            "name": "[parameters('containerApps_sample_app_name2')]",
+            "location": "East US",
+            "dependsOn": [
+                "[resourceId('Microsoft.App/managedEnvironments/storages', parameters('managedEnvironments_cne_rev_name'), 'myazurefiles')]"
+            ],
+            "properties": {
+                "managedEnvironmentId": "[resourceId('Microsoft.App/managedEnvironments', parameters('managedEnvironments_cne_rev_name'))]",
+                "configuration": {
+                    "activeRevisionsMode": "Multiple",
+                    "ingress": {
+                        "external": true,
+                        "targetPort": 8080,
+                        "transport": "auto",
+                        "traffic": [
+                            {
+                                "weight": 100,
+                                "latestRevision": true
+                            }
+                        ],
+                        "allowInsecure": false
+                    }
+                },
+                "template": {
+                    "containers": [
+                        {
+                            "image": "rmanimaran/readerapp:latest",
+                            "name": "reader",
+                            "resources": {
+                                "cpu": 0.5,
+                                "memory": "1Gi"
+                            },
+                            "volumeMounts": [
+                                {
+                                    "mountPath": "/app/images",
+                                    "volumeName": "azure-files-volume"
+                                }
+                            ]
+                        }
+                    ],
+                    "scale": {
+                        "minReplicas": 0,
+                        "maxReplicas": 5
+                    },
+                    "volumes": [
+                        {
+                            "name": "azure-files-volume",
+                            "storageType": "AzureFile",
+                            "storageName": "myazurefiles"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

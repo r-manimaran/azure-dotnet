@@ -1,5 +1,65 @@
-﻿<h3>FilesViewer</h3>
+﻿@page "/fileviewer"
+
+<h3>Images Viewer</h3>
+<PageTitle>Image Files Viewer</PageTitle>
+
+@if(imageFiles == null)
+{
+    <p>Loading images...</p>
+}
+else if (!imageFiles.Any())
+{
+    <div class="alert alert-info">
+        <p>No images found in the images directory</p>
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach(var imageFile in imageFiles)
+        {
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <img src="/images/@imageFile" class="card-img-top" alt="@imageFile" style="max-height:200px; width:100%; object-fit:contain;" />
+                    <div class="card-body">
+                        <p class="card-text-small">@imageFile</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
 
 @code {
+    private List<string>? imageFiles;
 
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadImages();
+
+    }
+    private async Task LoadImages()
+    {
+        try
+        {
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "images");
+            if (Directory.Exists(imagePath))
+            {
+                var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp" };
+                imageFiles = Directory.GetFiles(imagePath)
+                .Where(file => allowedExtensions.Contains(Path.GetExtension(file).ToLowerInvariant()))
+                .Select(file=>Path.GetFileName(file))
+                .ToList();
+
+            }
+            else
+            {
+                imageFiles = new List<string>();
+            }
+        }
+        catch(Exception ex)
+        {
+            imageFiles = new List<string>();
+        }
+    }
 }
