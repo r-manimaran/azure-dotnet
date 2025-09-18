@@ -23,11 +23,12 @@ public class ServicePrefixKeyVaultSecretManager : KeyVaultSecretManager
         _servicePrefix = $"{servicePrefix}{prefixDelimeter}";
         _logger = logger;
         _fallbackPrefix = fallbackPrefix ;
+
         _validPrefixes = new HashSet<string>(validPrefixes.Split(',', StringSplitOptions.RemoveEmptyEntries),
             StringComparer.OrdinalIgnoreCase);
 
         // Validate the Service prefix at construction
-        if (!_validPrefixes.Contains(servicePrefix))
+        if (!string.IsNullOrEmpty(fallbackPrefix) && !_validPrefixes.Contains(servicePrefix))
         {
             throw new InvalidOperationException(
                 $"Invalid service prefix '{servicePrefix}'. Valid prefixes:{string.Join(",", _validPrefixes)}");

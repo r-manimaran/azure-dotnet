@@ -1,0 +1,104 @@
+﻿@page "/upload"
+@using WriterApp.Services
+@inject UploadService UploadService
+
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Image Upload</PageTitle>
+
+<h3>Upload Images</h3>
+
+<div class="upload-container">
+
+        <div class="mb-3">
+            <label for="fileInput" class="form-label">Select Image:</label>
+            <InputFile id="fileInput" OnChange="@OnInputFileChange" accept="image/*" class="form-control" />
+            <div class="form-text"> Only image files are allowes (JPG, PNG, GIF, etc..)</div>
+        </div>
+
+        @if(selectedFile!=null)
+        {
+            <div class="mb-3">
+                <p><strong>Selected:</strong> @selectedFile.Name (@FormatFileSize(selectedFile.Size))</p>
+            </div>
+        }
+
+        <button type="button" class="btn btn-primary" @onclick="HandleUpload" disabled="@(selectedFile == null || isUploading)">
+            @if (isUploading)
+            {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                <text>Uploading...</text>
+            }
+            else
+            {
+                <text>Upload Image</text>
+            }
+        </button>
+    
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <div class="alert @(isSuccess ? "alert-success":"alert-danger") mt-3">
+            @message
+        </div>
+    }
+</div>
+
+
+@code {
+    private IBrowserFile? selectedFile;
+    private bool isUploading = false;
+    private string message = string.Empty;
+    private bool isSuccess = false;
+
+    private void OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+        message = string.Empty;
+    }
+    private async Task HandleUpload()
+    {
+        if (selectedFile == null) return;
+
+        isUploading = true;
+        message = string.Empty;
+        StateHasChanged();
+        try
+        {
+            // var content = new MultipartFormDataContent();
+            // var fileContent = new StreamContent(selectedFile.OpenReadStream(maxAllowedSize: 10 * 1024 * 1024)); // 10MB Limit.
+            // fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(selectedFile.ContentType);
+            // content.Add(fileContent, "file", selectedFile.Name);
+
+            var response = await UploadService.UploadImageAsync(selectedFile);
+            message = response.Message;
+            isSuccess = response.Success;
+
+            if (isSuccess)
+                selectedFile = null;
+        }
+        catch(Exception ex)
+        {
+            message = $"Error: {ex.Message}";
+            isSuccess = false;
+        }
+        finally
+        {
+            isUploading = false;
+            StateHasChanged();
+        }
+    }
+
+    private string FormatFileSize(long bytes)
+    {
+        string[] sizes = { "B", "KB", "MB", "GB" };
+        double len = bytes;
+        int order = 0;
+        while(len >=1024 && order <sizes.Length - 1)
+        {
+            order++;
+            len = len / 1024;
+        }
+        return $"{len:0.##} {sizes[order]}";
+    }
+   
+}

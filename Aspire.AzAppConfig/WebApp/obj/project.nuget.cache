@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "N79YdJMzzu4=",
+  "dgSpecHash": "SbvYhMS8t0c=",
   "success": true,
   "projectFilePath": "C:\\Maran\\Study\\Git\\Dotnet\\azure-dotnet\\Aspire.AzAppConfig\\WebApp\\WebApp.csproj",
   "expectedPackageFiles": [
@@ -47,8 +47,8 @@
     "C:\\Users\\rmani\\.nuget\\packages\\system.clientmodel\\1.4.1\\system.clientmodel.1.4.1.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\system.memory.data\\6.0.1\\system.memory.data.6.0.1.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.5.0\\system.security.cryptography.protecteddata.4.5.0.nupkg.sha512",
-    "C:\\Users\\rmani\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.3\\microsoft.windowsdesktop.app.ref.9.0.3.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.3\\microsoft.netcore.app.ref.9.0.3.nupkg.sha512",
+    "C:\\Users\\rmani\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.3\\microsoft.windowsdesktop.app.ref.9.0.3.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.3\\microsoft.aspnetcore.app.ref.9.0.3.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\9.0.3\\microsoft.netcore.app.host.win-x64.9.0.3.nupkg.sha512"
   ],

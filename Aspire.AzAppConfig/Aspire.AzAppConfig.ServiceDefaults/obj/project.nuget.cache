@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ODLT40s6XJo=",
+  "dgSpecHash": "Luvros7mbJM=",
   "success": true,
   "projectFilePath": "C:\\Maran\\Study\\Git\\Dotnet\\azure-dotnet\\Aspire.AzAppConfig\\Aspire.AzAppConfig.ServiceDefaults\\Aspire.AzAppConfig.ServiceDefaults.csproj",
   "expectedPackageFiles": [
@@ -31,8 +31,8 @@
     "C:\\Users\\rmani\\.nuget\\packages\\polly.core\\8.4.2\\polly.core.8.4.2.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\polly.extensions\\8.4.2\\polly.extensions.8.4.2.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\polly.ratelimiting\\8.4.2\\polly.ratelimiting.8.4.2.nupkg.sha512",
-    "C:\\Users\\rmani\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.3\\microsoft.windowsdesktop.app.ref.9.0.3.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.3\\microsoft.netcore.app.ref.9.0.3.nupkg.sha512",
+    "C:\\Users\\rmani\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.3\\microsoft.windowsdesktop.app.ref.9.0.3.nupkg.sha512",
     "C:\\Users\\rmani\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.3\\microsoft.aspnetcore.app.ref.9.0.3.nupkg.sha512"
   ],
   "logs": []
