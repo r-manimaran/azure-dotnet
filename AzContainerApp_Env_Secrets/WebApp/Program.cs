@@ -25,6 +25,7 @@ if (!app.Environment.IsDevelopment())
 // Disable HTTPS redirection for Azure Container Apps
 // app.UseHttpsRedirection();
 
+app.MapGet("/health", () => "Healthy");
 
 app.UseAntiforgery();
 
