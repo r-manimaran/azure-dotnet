@@ -115,6 +115,71 @@ Edit `Deployment/deploy.ps1` and update:
      --set-env-vars ENV_SECRET1=secretref:mysecret1 ENV_SECRET2=secretref:mysecret2
    ```
 
+## 🔄 Sharing Secrets Between Containers
+
+Azure Container Apps allows you to share the same secret across multiple containers with different environment variable names. This is useful when different applications need the same secret but reference it with different variable names.
+
+### Secret Sharing Architecture
+
+![secretsharing](image-10.png)
+
+### Implementation Steps
+
+1. **Create a shared secret**
+   ```bash
+   az containerapp secret set \
+     --name secrets-demo-app \
+     --resource-group rgSecretDemo \
+     --secrets shared-db-password=mySecretPassword123
+   ```
+
+2. **Deploy Container A with first environment variable name**
+   ```bash
+   az containerapp create \
+     --name webapp-container \
+     --resource-group rgSecretDemo \
+     --environment contenv \
+     --image yourusername/webapp:latest \
+     --set-env-vars DATABASE_PWD=secretref:shared-db-password
+   ```
+
+3. **Deploy Container B with different environment variable name**
+   ```bash
+   az containerapp create \
+     --name api-container \
+     --resource-group rgSecretDemo \
+     --environment contenv \
+     --image yourusername/api:latest \
+     --set-env-vars DB_SECRET=secretref:shared-db-password
+   ```
+
+### Benefits of Secret Sharing
+
+- **Centralized Management**: Update the secret once, affects all containers
+- **Consistency**: Same secret value across all applications
+- **Flexibility**: Each container can use its preferred environment variable name
+- **Security**: Secret is stored once and referenced multiple times
+
+### Example Use Cases
+
+- **Database Connection**: Multiple apps connecting to the same database
+- **API Keys**: Shared third-party service credentials
+- **Encryption Keys**: Common encryption/decryption across services
+- **Service Tokens**: Authentication tokens for inter-service communication
+
+### Verifying Secret Sharing
+
+1. **Check both containers have access to the secret**
+   ```bash
+   # For Container A
+   az containerapp exec --name webapp-container --resource-group rgSecretDemo --command "printenv | grep DATABASE_PWD"
+   
+   # For Container B
+   az containerapp exec --name api-container --resource-group rgSecretDemo --command "printenv | grep DB_SECRET"
+   ```
+
+2. **Both should show the same secret value but with different variable names**
+
 ## 🔍 Viewing Secrets in Azure Portal
 
 ### Azure Container App Configuration
