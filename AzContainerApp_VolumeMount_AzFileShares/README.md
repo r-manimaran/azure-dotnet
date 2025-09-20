@@ -4,6 +4,9 @@ This project demonstrates how to mount Azure File Shares to Azure Container Apps
 - **WriterApp**: Upload images to shared storage
 - **ReaderApp**: View images from shared storage
 
+![Architecture](image-4.png)
+*Architecture*
+
 ## Prerequisites
 
 1. **Azure CLI** installed and logged in
