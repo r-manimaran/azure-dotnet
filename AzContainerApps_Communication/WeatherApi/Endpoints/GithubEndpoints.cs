@@ -21,5 +21,12 @@ public static class GithubEndpoints
 
             return Results.Ok(res);
         });
+
+        api.MapGet("/folders/{owner}/{repo}", async (string owner, string repo, string apiKey, GitHubService githubService, string path = "") =>
+        {
+            var res = await githubService.GetFolders(owner, repo, apiKey, path);
+
+            return Results.Ok(res);
+        });
     }
 }
