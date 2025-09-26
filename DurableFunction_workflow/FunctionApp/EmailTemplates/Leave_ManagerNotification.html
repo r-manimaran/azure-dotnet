@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .approve {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .reject {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .details {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='header'>
+            <h2>{{RequestType}} Request Approval</h2>
+        </div>
+        <div class='content'>
+            <p>Dear Manager,</p>
+            <p><strong>{{EmployeeName}}</strong> has submitted a {{RequestType}} request that requires your approval.</p>
+
+            <div class='details'>
+                <h3>Request Details:</h3>
+                <p><strong>Employee:</strong> {{EmployeeName}}</p>
+                <p><strong>Start Date:</strong> {{StartDate}}</p>
+                <p><strong>End Date:</strong> {{EndDate}}</p>
+                <p><strong>Total Days:</strong> {{TotalDays}}</p>
+                <p><strong>Reason:</strong> {{Reason}}</p>
+            </div>
+
+            <div style='text-align: center; margin: 30px 0;'>
+                <a href='{{ApproveUrl}}' class='button approve'>APPROVE</a>
+                <a href='{{RejectUrl}}' class='button reject'>REJECT</a>
+            </div>
+
+            <p><small>Request ID: {{RequestId}}</small></p>
+        </div>
+    </div>
+</body>
+</html>

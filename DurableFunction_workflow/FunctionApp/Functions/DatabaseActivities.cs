@@ -1,4 +1,5 @@
-﻿using FunctionApp.Models;
+﻿using FunctionApp.DTOs;
+using FunctionApp.Models;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,23 +11,24 @@ public static class DatabaseActivities
 {
 
     [Function(nameof(SaveRequest))]
-    public static async Task<string> SaveRequest([ActivityTrigger] object input, FunctionContext context)
+    public static async Task<string> SaveRequest([ActivityTrigger] SaveRequestInput input, FunctionContext context)
     {
-        var serviceProvider = context.InstanceServices;
+       var serviceProvider = context.InstanceServices;
+ 
+
         var dbContext = serviceProvider.GetRequiredService<AppDbContext>();
 
-        dynamic requestData = input;
-        var request = requestData.Request;
-        var type = (RequestType)requestData.Type;
+        var requestJson = JsonSerializer.Serialize(input.Request);
+        var requestElement = JsonSerializer.Deserialize<JsonElement>(requestJson);
 
         var entity = new RequestEntity
         {
-            Id = request.RequestId,
-            InstanceId = requestData.InstanceId,
-            EmployeeId = requestData.EmployeeId,
-            EmployeeName = requestData.EmployeeName,
-            Type = type,
-            RequestData = JsonSerializer.Serialize(request),
+            Id = requestElement.GetProperty("RequestId").GetString()!,
+            InstanceId = input.InstanceId,
+            EmployeeId = requestElement.GetProperty("EmployeeId").GetString()!,
+            EmployeeName = requestElement.GetProperty("EmployeeName").GetString()!,
+            Type = input.Type,
+            RequestData = requestJson,
             Status = RequestStatus.Submitted,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow,
@@ -39,24 +41,19 @@ public static class DatabaseActivities
 
 
     [Function(nameof(UpdateRequestStatus))]
-    public static async Task UpdateRequestStatus([ActivityTrigger] object input, FunctionContext context)
+    public static async Task UpdateRequestStatus([ActivityTrigger] UpdateStatusInput input, FunctionContext context)
     {
         var serviceProdiver = context.InstanceServices;
         var dbContext = serviceProdiver.GetRequiredService<AppDbContext>();
 
-        dynamic statusUpdate = input;
-        string requestId = statusUpdate.RequestId;
-        RequestStatus status = statusUpdate.Status;
-        string comments = statusUpdate.Comments ?? "";
 
-        var entity = await dbContext.Requests.FirstOrDefaultAsync(r=>r.Id == requestId);
+        var entity = await dbContext.Requests.FirstOrDefaultAsync(r => r.Id == input.RequestId);
         if (entity != null)
         {
-            entity.Status = status;
-            entity.Comments = comments;
+            entity.Status = input.Status;
+            entity.Comments = input.Comments ?? "";
             entity.UpdatedAt = DateTime.UtcNow;
             await dbContext.SaveChangesAsync();
-        }           
-
+        }
     }
 }

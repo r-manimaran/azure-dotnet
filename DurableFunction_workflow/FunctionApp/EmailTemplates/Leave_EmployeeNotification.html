@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container { max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; }
+        .header { background-color: {{StatusColor}}; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .status { font-size: 24px; font-weight: bold; color: {{StatusColor}}; }
+        .details { background-color: #f8f9fa; padding: 15px; margin: 15px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='header'>
+            <h2>{{RequestType}} Request {{Status}}</h2>
+        </div>
+        <div class='content'>
+            <p>Dear {{EmployeeName}},</p>
+            <p>Your {{RequestType}} request has been <span class='status'>{{Status}}</span>.</p>
+
+            <div class='details'>
+                <h3>Request Details:</h3>
+                <p><strong>Start Date:</strong> {{StartDate}}</p>
+                <p><strong>End Date:</strong> {{EndDate}}</p>
+                <p><strong>Status:</strong> {{Status}}</p>
+                {{Comments}}
+            </div>
+
+            <p>Thank you.</p>
+        </div>
+    </div>
+</body>
+</html>

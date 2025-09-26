@@ -35,14 +35,14 @@ public class ManagerApprovalEndpoints
         var status = await client.GetInstanceAsync(instanceId);
         if(status == null){
             var notFoundResponse = req.CreateResponse(System.Net.HttpStatusCode.NotFound);
-            await notFoundResponse.WriteStringAsync(string.Format("Orchestration not found with {InstanceId}",instanceId));
+            await notFoundResponse.WriteStringAsync(string.Format("Orchestration not found with {0}",instanceId));
             return notFoundResponse;
         }
         if(status.RuntimeStatus !=OrchestrationRuntimeStatus.Running && 
             status.RuntimeStatus != OrchestrationRuntimeStatus.Pending)
         {
             var conflictResponse = req.CreateResponse(System.Net.HttpStatusCode.Conflict);
-            await conflictResponse.WriteStringAsync(string.Format("Orchestration is not running or pending with {InstanceId}", instanceId));
+            await conflictResponse.WriteStringAsync(string.Format("Orchestration is not running or pending with {0}", instanceId));
             return conflictResponse;
         }
         var approvalDto = new ApprovalResponse
@@ -56,7 +56,7 @@ public class ManagerApprovalEndpoints
         _logger.LogInformation($"ApprovalResponse event raised for instance ID: {instanceId}");
 
         var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
-        await response.WriteStringAsync(string.Format("Leave request approved with {InstanceId}", instanceId));
+        await response.WriteStringAsync(string.Format("Leave request approved with {0}", instanceId));
         return response;
     }
 
@@ -75,14 +75,14 @@ public class ManagerApprovalEndpoints
         if(status == null)
         {
             var notFoundResponse = req.CreateResponse(System.Net.HttpStatusCode.NotFound);
-            await notFoundResponse.WriteStringAsync(string.Format("Orchestration not found with {InstanceId}", instanceId));
+            await notFoundResponse.WriteStringAsync(string.Format("Orchestration not found with {0}", instanceId));
             return notFoundResponse;
         }
 
         if(status.RuntimeStatus != OrchestrationRuntimeStatus.Running && status.RuntimeStatus != OrchestrationRuntimeStatus.Pending)
         {
             var conflictResponse = req.CreateResponse(System.Net.HttpStatusCode.Conflict);
-            await conflictResponse.WriteStringAsync(string.Format("Orchestration is not running or pending with {InstanceId}", instanceId));
+            await conflictResponse.WriteStringAsync(string.Format("Orchestration is not running or pending with {0}", instanceId));
             return conflictResponse;
         }
         var approvalDto = new ApprovalResponse
@@ -96,7 +96,7 @@ public class ManagerApprovalEndpoints
         _logger.LogInformation($"ApprovalResponse event raised for instance ID: {instanceId}");
 
         var response =req.CreateResponse(System.Net.HttpStatusCode.OK);
-        await response.WriteStringAsync(string.Format("Leave request rejected with {InstanceId}", instanceId));
+        await response.WriteStringAsync(string.Format("Leave request rejected with {0}", instanceId));
         return response;
 
     }
@@ -115,14 +115,14 @@ public class ManagerApprovalEndpoints
         if (status == null)
         {
             var notFoundResponse = req.CreateResponse(System.Net.HttpStatusCode.NotFound);
-            await notFoundResponse.WriteStringAsync(string.Format("Orchestration not found with {InstanceId}", instanceId));
+            await notFoundResponse.WriteStringAsync(string.Format("Orchestration not found with {0}", instanceId));
             return notFoundResponse;
         }
         if(status.RuntimeStatus != OrchestrationRuntimeStatus.Running && 
             status.RuntimeStatus != OrchestrationRuntimeStatus.Pending)
         {
             var conflictResponse = req.CreateResponse(System.Net.HttpStatusCode.Conflict);
-            await conflictResponse.WriteStringAsync(string.Format("Orchestration is not running or pending with {InstanceId}", instanceId));
+            await conflictResponse.WriteStringAsync(string.Format("Orchestration is not running or pending with {0}", instanceId));
             return conflictResponse;
         }
 
@@ -136,7 +136,7 @@ public class ManagerApprovalEndpoints
         await client.RaiseEventAsync(instanceId, "ApprovalResponse", approvalDto);
         _logger.LogInformation($"ApprovalResponse event raised for instance ID: {instanceId}");
         var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
-        await response.WriteStringAsync(string.Format("Expense claim approved with {InstanceId}", instanceId));
+        await response.WriteStringAsync(string.Format("Expense claim approved with {0}", instanceId));
         return response;
 
     }
@@ -157,14 +157,14 @@ public class ManagerApprovalEndpoints
         if (status == null)
         {
             var notFoundResponse = req.CreateResponse(System.Net.HttpStatusCode.NotFound);
-            await notFoundResponse.WriteStringAsync(string.Format("Orchestration not found with {InstanceId}", instanceId));
+            await notFoundResponse.WriteStringAsync(string.Format("Orchestration not found with {0}", instanceId));
             return notFoundResponse;
         }
         if (status.RuntimeStatus != OrchestrationRuntimeStatus.Running &&
             status.RuntimeStatus != OrchestrationRuntimeStatus.Pending)
         {
             var conflictResponse = req.CreateResponse(System.Net.HttpStatusCode.Conflict);
-            await conflictResponse.WriteStringAsync(string.Format("Orchestration is not running or pending with {InstanceId}", instanceId));
+            await conflictResponse.WriteStringAsync(string.Format("Orchestration is not running or pending with {0}", instanceId));
             return conflictResponse;
         }
 
@@ -178,7 +178,7 @@ public class ManagerApprovalEndpoints
         await client.RaiseEventAsync(instanceId, "ApprovalResponse", approvalDto);
         _logger.LogInformation($"ApprovalResponse event raised for instance ID: {instanceId}");
         var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
-        await response.WriteStringAsync(string.Format("Expense claim rejected with {InstanceId}", instanceId));
+        await response.WriteStringAsync(string.Format("Expense claim rejected with {0}", instanceId));
         return response;
     }
 }

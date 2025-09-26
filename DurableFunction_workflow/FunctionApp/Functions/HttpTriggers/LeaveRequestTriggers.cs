@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.DurableTask.Client;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
@@ -50,4 +52,35 @@ public class LeaveRequestTriggers
             return response;
         }
     }
+
+    [Function(nameof(GetRequestStatus))]
+    public async Task<HttpResponseData> GetRequestStatus(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = "request/{requestId}/status")] HttpRequestData req,
+        string requestId,
+        FunctionContext context)
+    {
+        var logger = context.GetLogger("GetRequestStatus");
+        var dbContext = context.InstanceServices.GetRequiredService<AppDbContext>();
+
+        var request = await dbContext.Requests.FirstOrDefaultAsync(x=>x.Id == requestId);
+
+        if (request == null)
+        {
+            var notFound = req.CreateResponse(System.Net.HttpStatusCode.NotFound);
+            await notFound.WriteAsJsonAsync(new { error = "Request not found" });
+            return notFound;
+        }
+        var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
+        await response.WriteAsJsonAsync(new
+        {
+            RequestId = request.Id,
+            Status = request.Status.ToString(),
+            Type = request.Type.ToString(),
+            CreatedAt = request.CreatedAt,
+            UpdatedAt = request.UpdatedAt,
+            Comments = request.Comments
+        });
+        return response;
+    }
+
 }

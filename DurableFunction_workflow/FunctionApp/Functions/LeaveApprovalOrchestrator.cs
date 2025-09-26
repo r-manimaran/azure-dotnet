@@ -45,7 +45,19 @@ public static class LeaveApprovalOrchestrator
             });
 
             // Step 4: Send Notificaton to manager
-            await context.CallActivityAsync(nameof(NotificationActivities.SendManagerNotification), new { Request = leaveRequest, Type = "Leave" });
+            await context.CallActivityAsync(nameof(NotificationActivities.SendManagerNotification), 
+                new ManagerNotificationInput 
+                { 
+                    EmployeeName = leaveRequest.EmployeeName,
+                    ManagerEmail = leaveRequest.ManagerEmail,
+                    RequestId = leaveRequest.RequestId,
+                    RequestType = leaveRequest.LeaveType.ToString(),
+                    StartDate = leaveRequest.StartDate,
+                    EndDate = leaveRequest.EndDate,
+                    TotalDays = leaveRequest.TotalDays,
+                    InstanceId = instanceId,
+                    Reason = leaveRequest.Reason,
+                });
 
             // Step 5: Wait for approval with timeout (7 days)
             using var cts = new CancellationTokenSource();
@@ -59,8 +71,26 @@ public static class LeaveApprovalOrchestrator
                 var approval = approvalTask.Result;
 
                 var finalStatus = approval.Status == ApprovalStatus.Approved ? RequestStatus.Approved : RequestStatus.Rejected;
+
                 // step 6: Process the approval
                 await context.CallActivityAsync(nameof(LeaveApprovalActivities.ProcessLeaveApproval), new { Request = leaveRequest, Approval = approval });
+               
+                // step 7: Update the Approval Status
+                await context.CallActivityAsync(nameof(DatabaseActivities.UpdateRequestStatus), new { RequestId = leaveRequest.RequestId, Status = finalStatus, Comments = $"Leave request {approval.Status}" });
+              
+                // step 8: Send notification to employee
+                await context.CallActivityAsync(nameof(NotificationActivities.SendEmployeeNotification), 
+                    new EmployeeNotificationInput
+                        { 
+                        EmployeeEmail = leaveRequest.EmployeeEmail,
+                        StartDate = leaveRequest.StartDate,
+                        EmployeeName = leaveRequest.EmployeeName,
+                        EndDate = leaveRequest.EndDate,
+                        Status = approval.Status.ToString(),
+                        RequestType = leaveRequest.LeaveType.ToString(),
+                        Comments = leaveRequest.Comments
+                        });
+                
                 return $"Leave request {approval.Status}";
             }
             else
