@@ -33,7 +33,7 @@ public static class ExpenseApprovalOrchestrator
                 return "Expense request auto-approved";
             }
 
-            // Step 3: Send notification to manager
+            // Step 3: Send notification to managerProcess
             await context.CallActivityAsync(nameof(NotificationActivities.SendManagerNotification), 
                 new { Request = expenseRequest, Type="Expense" });
             logger.LogInformation("Notification sent to manager");
