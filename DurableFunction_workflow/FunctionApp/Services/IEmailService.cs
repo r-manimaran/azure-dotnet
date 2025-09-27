@@ -14,8 +14,10 @@ namespace FunctionApp.Services;
 
 public interface IEmailService
 {
-    Task SendManagerApprovalEmailAsync(ManagerNotificationInput input);
-    Task SendEmployeeNotificationEmailAsync(EmployeeNotificationInput input);
+    Task SendLeaveManagerApprovalEmailAsync(ManagerNotificationInput input);
+    Task SendEmployeeLeaveNotificationEmailAsync(EmployeeNotificationInput input);
+    Task SendExpenseManagerApprovalEmailAsync(ExpenseManagerNotificationInput input);
+    Task SendExpenseEmployeeNotificationEmailAsync(ExpenseEmployeeNotificationInput input);
 }
 
 public class EmailService : IEmailService
@@ -31,7 +33,7 @@ public class EmailService : IEmailService
         _templateService = templateService;
         _baseUrl = Environment.GetEnvironmentVariable("BaseUrl") ?? "https://localhost:7071";
     }
-    public async Task SendManagerApprovalEmailAsync(ManagerNotificationInput input)
+    public async Task SendLeaveManagerApprovalEmailAsync(ManagerNotificationInput input)
     {
         var from = new EmailAddress("noreply@company.com", "Contoso");
         var subject = $"{input.RequestType} Request - {input.EmployeeName}";
@@ -55,7 +57,7 @@ public class EmailService : IEmailService
         await _sendGridClient.SendEmailAsync(msg);
     }
 
-    public async Task SendEmployeeNotificationEmailAsync(EmployeeNotificationInput input)
+    public async Task SendEmployeeLeaveNotificationEmailAsync(EmployeeNotificationInput input)
     {
         var from = new EmailAddress("noreply@company.com", "Contoso");
         var subject = $"{input.RequestType} Request - {input.Status}";
@@ -76,5 +78,66 @@ public class EmailService : IEmailService
 
         var msg = MailHelper.CreateSingleEmail(from, to, subject, "", htmlContent);
         await _sendGridClient.SendEmailAsync(msg);
+    }
+
+    public async Task SendExpenseManagerApprovalEmailAsync(ExpenseManagerNotificationInput input)
+    {
+       var template = await _templateService.LoadTemplateAsync("Expense_ManagerNotification");
+        var expenseItemsHtml = string.Join("", input.Items.Select(item =>
+        $"<div class='expense-item'>" +
+        $"<strong>{item.Description}</strong> - {input.Currency} {item.Amount:F2}<br>" +
+        $"<small>Date: {item.Date:yyyy-MM-dd} | Category: {item.Category}</small>" +
+        $"</div>"));
+        var tokens = new Dictionary<string, string>
+        {
+            { "EmployeeName", input.EmployeeName },
+            { "TotalAmount", $"{input.TotalAmount:F2}" },
+            { "Currency", input.Currency },
+            { "RequestedDate",input.RequestedDate.ToString("yyyy-MM-dd") },
+            { "RequestId", input.RequestId.ToString() },
+            { "ApproveUrl", $"{_baseUrl}/api/ManagerApproval/expenseApprove/{input.InstanceId}" },
+            { "RejectUrl", $"{_baseUrl}/api/ManagerApproval/expenseReject/{input.InstanceId}" },
+            { "ExpenseItems", expenseItemsHtml  }
+        };
+
+        var htmlContent = _templateService.ReplaceTokens(template, tokens);
+        var from = new EmailAddress("noreply@example.com", "Contoso");
+        var to = new EmailAddress(input.ManagerEmail);
+        var subject = $"Expense Claim Approval Request - {input.EmployeeName}";
+        var msg = MailHelper.CreateSingleEmail(from, to, subject, "", htmlContent);
+        await _sendGridClient.SendEmailAsync(msg);
+    }
+
+    public async Task SendExpenseEmployeeNotificationEmailAsync(ExpenseEmployeeNotificationInput input)
+    {
+        var template = await _templateService.LoadTemplateAsync("Expense_EmployeeNotification");
+        var statusColor = input.Status == "Approved" ? "#28a745" : "#dc3545";
+
+        var expenseItemsHtml = string.Join("", input.Items.Select(item =>
+        $"<div class='expense-item'>" +
+        $"<strong>{item.Description}</strong> - {input.Currency} {item.Amount:F2}<br>" +
+        $"<small>Date: {item.Date:yyyy-MM-dd} | Category: {item.Category}</small>" +
+        $"</div>"));
+
+        var tokens = new Dictionary<string, string>
+        {
+            { "EmployeeName", input.EmployeeName },
+            { "Status", input.Status.ToUpper() },
+            { "StatusColor", statusColor },
+            { "TotalAmount", $"{input.TotalAmount:F2}" },
+            { "Currency", input.Currency },
+            { "RequestedDate",input.RequestedDate.ToString("yyyy-MM-dd") },
+            { "ExpenseItems", expenseItemsHtml },
+            { "Comments", string.IsNullOrEmpty(input.Comments) ? "" : $"<p><strong>Manager Comments:</strong> {input.Comments}</p>" }
+        };
+
+        var hhtmlContent = _templateService.ReplaceTokens(template, tokens);
+        var from = new EmailAddress("noreply@example.com", "Contoso");
+        var to = new EmailAddress(input.EmployeeEmail);
+        var subject = $"Your Expense Claim -  {{input.Status}} ({{input.Currency}} {{input.TotalAmount:F2}})";
+
+        var msg = MailHelper.CreateSingleEmail(from, to, subject, "", hhtmlContent);
+        await _sendGridClient.SendEmailAsync(msg);
+
     }
 }

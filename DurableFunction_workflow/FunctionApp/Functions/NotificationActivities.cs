@@ -19,7 +19,7 @@ public static class NotificationActivities
     {
         var logger = context.GetLogger(nameof(SendManagerNotification));
         var emailService = context.InstanceServices.GetRequiredService<IEmailService>();
-        await emailService.SendManagerApprovalEmailAsync(input);
+        await emailService.SendLeaveManagerApprovalEmailAsync(input);
 
         logger.LogInformation($"Manager notification sent for input:{JsonSerializer.Serialize(input)}");
     }
@@ -29,8 +29,26 @@ public static class NotificationActivities
     {
         var logger = context.GetLogger(nameof(SendEmployeeNotification));
         var emailService = context.InstanceServices.GetRequiredService<IEmailService>();
-        await emailService.SendEmployeeNotificationEmailAsync(input);
+        await emailService.SendEmployeeLeaveNotificationEmailAsync(input);
 
+        logger.LogInformation($"Employee notification sent: {JsonSerializer.Serialize(input)}");
+    }
+
+    [Function(nameof(SendExpenseManagerNotification))]
+    public static async Task SendExpenseManagerNotification([ActivityTrigger] ExpenseManagerNotificationInput input, FunctionContext context)
+    {
+        var logger = context.GetLogger(nameof(SendEmployeeNotification));
+        var emailService = context.InstanceServices.GetRequiredService<IEmailService>();
+        await emailService.SendExpenseManagerApprovalEmailAsync(input);
+        logger.LogInformation($"Manager notification sent for input:{JsonSerializer.Serialize(input)}");
+    }
+
+    [Function(nameof(SendEmpoyeeExpenseNotification))]
+    public static async Task SendEmpoyeeExpenseNotification([ActivityTrigger] ExpenseEmployeeNotificationInput input, FunctionContext context)
+    {
+        var logger = context.GetLogger(nameof(SendEmployeeNotification));
+        var emailService = context.InstanceServices.GetRequiredService<IEmailService>();
+        await emailService.SendExpenseEmployeeNotificationEmailAsync(input);
         logger.LogInformation($"Employee notification sent: {JsonSerializer.Serialize(input)}");
     }
 }

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container { max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; }
+        .header { background-color: {{StatusColor}}; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .status { font-size: 24px; font-weight: bold; color: {{StatusColor}}; }
+        .details { background-color: #f8f9fa; padding: 15px; margin: 15px 0; border-radius: 4px; }
+        .expense-item { border-bottom: 1px solid #ddd; padding: 8px 0; }
+        .total-amount { font-size: 18px; font-weight: bold; color: #007bff; }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <div class='header'>
+            <h2>💰 Expense Claim {{Status}}</h2>
+        </div>
+        <div class='content'>
+            <p>Dear {{EmployeeName}},</p>
+            <p>Your expense claim has been <span class='status'>{{Status}}</span>.</p>
+            
+            <div class='details'>
+                <h3>Expense Summary:</h3>
+                <p><strong>Total Amount:</strong> <span class='total-amount'>{{Currency}} {{TotalAmount}}</span></p>
+                <p><strong>Status:</strong> {{Status}}</p>
+                <p><strong>Submitted Date:</strong> {{RequestedDate}}</p>
+                {{Comments}}
+                
+                <h4>Expense Items:</h4>
+                {{ExpenseItems}}
+            </div>
+            
+            <p>Thank you.</p>
+        </div>
+    </div>
+</body>
+</html>
