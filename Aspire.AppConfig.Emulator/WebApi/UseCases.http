@@ -1,0 +1,61 @@
+@WebApi_HostAddress = http://localhost:5073
+
+### Original Weather Forecast
+GET {{WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+### 1. Database Configuration Use Case
+GET {{WebApi_HostAddress}}/api/config/database
+Accept: application/json
+
+### 2. Feature Flags Configuration
+GET {{WebApi_HostAddress}}/api/config/features
+Accept: application/json
+
+### 3. API Settings Configuration
+GET {{WebApi_HostAddress}}/api/config/api-settings
+Accept: application/json
+
+### 4. Environment Configuration
+GET {{WebApi_HostAddress}}/api/config/environment
+Accept: application/json
+
+### 5. Check Specific Feature Flag
+GET {{WebApi_HostAddress}}/api/featureflag/check/NewDashboard
+Accept: application/json
+
+### 6. Get All Feature Flags Status
+GET {{WebApi_HostAddress}}/api/featureflag/all
+Accept: application/json
+
+### 7. Get Percentage Feature Flag
+GET {{WebApi_HostAddress}}/api/featureflag/percentage/BetaFeatures
+Accept: application/json
+
+### 8. Refresh Configuration (Dynamic)
+GET {{WebApi_HostAddress}}/api/dynamicconfig/refresh
+Accept: application/json
+
+### 9. Get App Settings
+GET {{WebApi_HostAddress}}/api/dynamicconfig/app-settings
+Accept: application/json
+
+### 10. Get Connection Strings
+GET {{WebApi_HostAddress}}/api/dynamicconfig/connection-strings
+Accept: application/json
+
+### 11. Get Specific Configuration Section
+GET {{WebApi_HostAddress}}/api/dynamicconfig/section/Logging
+Accept: application/json
+
+### 12. Get Database Section
+GET {{WebApi_HostAddress}}/api/dynamicconfig/section/Database
+Accept: application/json
+
+### 13. Get Features Section
+GET {{WebApi_HostAddress}}/api/dynamicconfig/section/Features
+Accept: application/json
+
+### 14. Test Connection String Configuration
+GET {{WebApi_HostAddress}}/api/test/connection-test
+Accept: application/json
