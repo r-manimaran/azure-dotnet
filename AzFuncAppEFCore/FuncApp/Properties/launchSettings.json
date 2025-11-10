@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "FuncApp": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7068"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "containerRunArguments": "--init",
+      "httpPort": 32483,
+      "useSSL": false
+    }
+  }
+}
