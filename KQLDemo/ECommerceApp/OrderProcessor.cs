@@ -22,13 +22,15 @@ public class OrderProcessor
         int price = random.Next(10, 500);
 
         // Level 3 Exploration: Structured Logging
+        var userType = price > 400 ? "VIP" : "Standard";
+        
         using(_logger.BeginScope(new Dictionary<string,object>
         {
             ["OrderId"]=orderId,
-            ["UserType"]=price > 400 ? "VIP":"Standard"
+            ["UserType"]=userType
         }))
         {
-            _logger.LogInformation("Processing order for amount: {Price}", price);
+            _logger.LogInformation("Processing order for amount: {Price} for {UserType} user", price, userType);
 
             //Simulate external dependency (Level 2: Duration/Performance)
             await Task.Delay(random.Next(100,2000));
