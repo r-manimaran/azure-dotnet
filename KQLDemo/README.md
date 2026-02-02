@@ -72,3 +72,58 @@ traces
     InvocationId = tostring(customDimensions.prop__invocationId)
 ```
 ![alt text](image-2.png)
+
+## Business Value Query: 
+- Instead of looking at logs, lets look at money. Since we used TrackMetric, we don't have to parse strings.
+
+```bash
+customMetrics
+| where name == "PaymentAmount"
+| summarize 
+    TotalVolume = sum(value), 
+    AverageTransaction = avg(value), 
+    TransactionCount = count() 
+    by bin(timestamp, 1h)
+| render columnchart
+```
+![alt text](image-3.png)
+
+## The Funnel Analysis.
+- Did users who started a payment actually finish it? We use customEvents to track the "Step" flow.
+
+```bash 
+customEvents
+| where name in ("PaymentInitiated", "FraudAlertTriggered")
+| summarize 
+    Started = countif(name == "PaymentInitiated"), 
+    FraudFlags = countif(name == "FraudAlertTriggered") 
+    by bin(timestamp, 1h)
+| extend FraudRate = (todouble(FraudFlags) / Started) * 100
+```
+
+## Dependency Bottlenect Search
+- We manually tracked the "ExternalCardProcessor". Lets see if that specific 3rd party API is slowing us down.
+
+```bash
+dependencies
+| where target == "ExternalCardProcessor"
+| summarize 
+    AvgDuration = avg(duration), 
+    SuccessRate = (countif(success == true) * 100.0 / count()),
+    P95 = percentile(duration, 95)
+    by bin(timestamp, 15m)
+| render timechart
+```
+## Corelation Master
+- If a "FraudAlertTriggered" event occurs, find every single log and dependency that happened during he specific execution
+
+```bash
+let fraudInvocations = customEvents 
+    | where name == "FraudAlertTriggered" 
+    | project operation_Id;
+union requests, traces, dependencies, exceptions
+| where operation_Id in (fraudInvocations)
+| sort by timestamp asc
+| project timestamp, itemType, name, message, duration
+```
+![alt text](image-4.png)
