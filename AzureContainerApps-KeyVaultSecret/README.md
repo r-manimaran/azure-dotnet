@@ -17,10 +17,27 @@ This guide demonstrates how to configure Azure Container Apps to reference secre
 3. Configure the container to use the Docker image: `rmanimaran/containerenvapp:latest`
    - Note: You can also use images from Azure Container Registry (ACR)
 
+![alt text](images/image-1.png)
+
+![alt text](images/image-2.png)
+
+![alt text](images/image-3.png)
+
+![Access application without Env Varables set](images/image-4.png)
+
+
 ### Step 2: Create Initial Secrets
 
 1. Create secrets in the Azure Container App
 2. Create environment variables (`ENV_SECRET1`, `ENV_SECRET2`) and map them to the secrets created above
+
+![Create Secret1](images/image-5.png)
+
+![Secret2](images/image-6.png)
+
+![Secret Mapping](images/image-7.png)
+
+![After Env Mapping](images/image-8.png)
 
 ### Step 3: Create and Configure Azure Key Vault
 
@@ -28,12 +45,18 @@ This guide demonstrates how to configure Azure Container Apps to reference secre
 2. Assign the **Key Vault Administrator** role to your user account
 3. Create a secret in Key Vault:
    - Name: `secret2`
-   - Value: `secret from KV`
+   - Value: `secret2FromKV`
+
+![alt text](images/image.png)
 
 ### Step 4: Configure Managed Identity
 
 1. Enable Managed Identity for the Azure Container App
 2. Assign the **Key Vault Secrets User** role to the Container App's managed identity on the Key Vault
+
+![alt text](images/image-10.png)
+
+![alt text](images/image-9.png)
 
 ### Step 5: Update Environment Variables to Reference Key Vault
 
@@ -41,6 +64,10 @@ This guide demonstrates how to configure Azure Container Apps to reference secre
 2. Update the variable mapping to reference secrets from Key Vault instead of local secrets
 3. Create a new revision
 4. Verify that the secrets are loaded from Key Vault
+
+![alt text](images/image-11.png)
+
+![alt text](images/image-12.png)
 
 ## Part 2: Mount Secrets as Volumes
 
@@ -51,6 +78,10 @@ Secrets can also be mounted as files in the container filesystem.
 1. In the Azure Container App, create a volume named `secrets`
 2. In the Volume mounts tab, select the created volume and mount it to `/mnt/secrets`
 3. Create a new revision
+
+![Create Secret Volume type ](images/image-13.png)
+
+![alt text](images/image-14.png)
 
 ### Step 2: Verify Mounted Secrets
 
@@ -71,6 +102,12 @@ Secrets can also be mounted as files in the container filesystem.
    cat secret1
    cat secret2
    ```
+
+![alt text](images/image-15.png)
+
+![alt text]images/image-16.png)
+
+![alt text](images/image-17.png)
 
 ## Summary
 
